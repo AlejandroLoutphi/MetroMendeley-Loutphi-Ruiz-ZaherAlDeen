@@ -9,15 +9,17 @@ package DataStructures;
  *
  * @author ayahzaheraldeen
  */
+import java.util.HashMap;
+import metromendeleyloutphiruizzaheraldeen.Investigation;
+
 public class HashFunction {
-    
     // Example: Simulating a hash table with an array
-    private int[] hashTable;
+    private HashMap<Integer, Investigation> hashTable;
     private int tableSize;
 
     public HashFunction(int size) {
         tableSize = size;
-        hashTable = new int[tableSize];
+        hashTable = new HashMap<>();
     }
 
     public int generateHash(String input) {
@@ -37,42 +39,60 @@ public class HashFunction {
         return hash;
     }
 
-    // Example method to add an entry to the hash table
-    public void addEntry(String key, int value) {
+    // Method to add an entry (Investigation object) to the hash table
+    public void addEntry(String key, Investigation value) {
         int hash = generateHash(key);
-        hashTable[hash] = value;
+        hashTable.put(hash, value);
+    }
+
+    // Method to retrieve an Investigation object from the hash table by title
+    public Investigation getAbstract(String key) {
+        int hash = generateHash(key);
+        return hashTable.get(hash);
+    }
+
+    // Method to check if the hash table contains a specific investigation title
+    public boolean containsAbstract(String key) {
+        int hash = generateHash(key);
+        return hashTable.containsKey(hash);
     }
 
     // Example method to check if the hash table is empty
     public boolean isEmpty() {
-        for (int i = 0; i < tableSize; i++) {
-            if (hashTable[i] != 0) { // Assuming 0 means no entry at that index
-                return false;
-            }
-        }
-        return true;
+        return hashTable.isEmpty();
     }
 
     public static void main(String[] args) {
         HashFunction hasher = new HashFunction(100); // Assuming table size is 100
-        String researchTitle = "ayah";
-        
-        int hashValue = hasher.generateHash(researchTitle);
-        System.out.println("Hash value for '" + researchTitle + "': " + hashValue);
 
-        // Add an entry to the hash table
-        hasher.addEntry(researchTitle, hashValue);
+        // Example investigation
+        String abstractTitle = "Example Investigation 1";
+        String[] authors = {"Author 1", "Author 2"};
+        String abstractText = "This is the abstract of Example Investigation 1.";
+        String[] keywords = {"Keyword 1", "Keyword 2"};
+
+        // Create an Investigation object
+        Investigation investigation = new Investigation(abstractTitle, authors, abstractText, keywords);
+
+        // Generate hash and add entry to hash table
+        int hashValue = hasher.generateHash(abstractTitle);
+        hasher.addEntry(abstractTitle, investigation);
+
+        // Retrieve Investigation object by title
+        Investigation retrievedInvestigation = hasher.getAbstract(abstractTitle);
+
+        // Print investigation details
+        if (retrievedInvestigation != null) {
+            System.out.println("Investigation Title: " + retrievedInvestigation.getTitle());
+            System.out.println("Authors: " + String.join(", ", retrievedInvestigation.getAuthors()));
+            System.out.println("Abstract: " + retrievedInvestigation.getText());
+            System.out.println("Keywords: " + String.join(", ", retrievedInvestigation.getKeywords()));
+        } else {
+            System.out.println("Investigation with title '" + abstractTitle + "' not found.");
+        }
 
         // Check if hash table is empty
         System.out.println("Is hash table empty? " + hasher.isEmpty()); // Should print false
-
-        // Clear the hash table (not a standard method, just for demonstration)
-        for (int i = 0; i < hasher.tableSize; i++) {
-            hasher.hashTable[i] = 0;
-        }
-
-        // Check again if hash table is empty
-        System.out.println("Is hash table empty? " + hasher.isEmpty()); // Should print true
     }
 }
 
