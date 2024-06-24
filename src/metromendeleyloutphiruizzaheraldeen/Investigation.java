@@ -9,7 +9,7 @@ package metromendeleyloutphiruizzaheraldeen;
  *
  * @author Alejandro Loutphi
  */
-public class Abstract {
+public class Investigation {
 
     String title;
     String[] authors;
@@ -19,7 +19,7 @@ public class Abstract {
     /**
      * Constructs an Abstract with all attributes set to null.
      */
-    public Abstract() {
+    public Investigation() {
         this.title = null;
         this.authors = null;
         this.text = null;
@@ -34,7 +34,7 @@ public class Abstract {
      * @param text abstract text
      * @param keywords String[] with abstract keywords
      */
-    public Abstract(String title, String[] authors, String text, String[] keywords) {
+    public Investigation(String title, String[] authors, String text, String[] keywords) {
         this.title = title;
         this.authors = authors;
         this.text = text;

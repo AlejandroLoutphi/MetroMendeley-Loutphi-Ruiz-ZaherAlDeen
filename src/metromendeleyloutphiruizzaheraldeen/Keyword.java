@@ -15,7 +15,7 @@ import datastructures.LinkedList;
 public class Keyword {
 
     String keyword;
-    LinkedList<Abstract> abstractsWithKeyword;
+    LinkedList<Investigation> abstractsWithKeyword;
 
     /**
      * Construct Keyword with all attributes set to null.
@@ -32,7 +32,7 @@ public class Keyword {
      * @param abstractsWithKeyword LinkedList<Abstract> with all abstracts in which
      *                             the keyword appears
      */
-    public Keyword(String keyword, LinkedList<Abstract> abstractsWithKeyword) {
+    public Keyword(String keyword, LinkedList<Investigation> abstractsWithKeyword) {
         this.keyword = keyword;
         this.abstractsWithKeyword = abstractsWithKeyword;
     }
@@ -70,7 +70,7 @@ public class Keyword {
      * 
      * @return the LinkedList with all tha Abstracts in which this keyword appears
      */
-    public LinkedList<Abstract> getAbstractsWithKeyword() {
+    public LinkedList<Investigation> getAbstractsWithKeyword() {
         return abstractsWithKeyword;
     }
 
@@ -79,7 +79,7 @@ public class Keyword {
      * 
      * @param abstractsWithKeyword LinkedList to set as the new abstractsWithKeyword
      */
-    public void setAbstractsWithKeyword(LinkedList<Abstract> abstractsWithKeyword) {
+    public void setAbstractsWithKeyword(LinkedList<Investigation> abstractsWithKeyword) {
         this.abstractsWithKeyword = abstractsWithKeyword;
     }
 
@@ -88,7 +88,7 @@ public class Keyword {
      * 
      * @param newAbstract new abstract to add to the list
      */
-    public void addAbstract(Abstract newAbstract) {
+    public void addAbstract(Investigation newAbstract) {
         this.getAbstractsWithKeyword().addAtHead(newAbstract);
     }
 }
