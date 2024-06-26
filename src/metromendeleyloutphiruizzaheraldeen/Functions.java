@@ -7,30 +7,100 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-/**
- *
- * @author ayahzaheraldeen
- */
-public class Functions {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Functions {
 
     public static void main(String[] args) {
         // Define the filename
         String fileName = "Investigations.txt";
-        
+
         // Check if the file exists in the current directory
         File file = new File(fileName);
-        
 
+        // List to store Investigation objects
+        List<Investigation> investigations = new ArrayList<>();
 
-        
         if (file.exists()) {
             // File exists, attempt to open and read it
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
+                StringBuilder authorsBuilder = new StringBuilder();
+                StringBuilder abstractBuilder = new StringBuilder();
+                List<String> keywordsList = new ArrayList<>();
+                String title = null;
+                boolean readingAbstract = false;
+
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line); // Process each line as needed
+                    // Skip empty lines
+                    if (line.trim().isEmpty()) {
+                        continue;
+                    }
+
+                    // Check for markers and collect data accordingly
+                    if (line.startsWith("Autores")) {
+                        // If title has been set, create previous investigation
+                        if (title != null) {
+                            // Convert keywordsList to String[]
+                            String[] keywordsArray = keywordsList.toArray(new String[0]);
+
+                            // Create Investigation object and add to list
+                            Investigation investigation = new Investigation(title.trim(),
+                                    parseAuthors(authorsBuilder.toString().trim()),
+                                    abstractBuilder.toString().trim(),
+                                    keywordsArray);
+                            investigations.add(investigation);
+
+                            // Reset StringBuilder and List for next investigation
+                            authorsBuilder.setLength(0);
+                            abstractBuilder.setLength(0);
+                            keywordsList.clear();
+                        }
+
+                        // Set the title for the new investigation
+                        title = null;
+                        readingAbstract = false;
+                    } else if (line.startsWith("Palabras Claves")) {
+                        // Start collecting keywords
+                        String keywordsLine = line.substring("Palabras Claves:".length()).trim();
+                        String[] keywordsArray = keywordsLine.split(",");
+                        for (String keyword : keywordsArray) {
+                            keywordsList.add(keyword.trim());
+                        }
+                    } else if (line.startsWith("Resumen")) {
+                        // Start collecting abstract
+                        abstractBuilder.append(line.substring("Resumen".length())).append("\n");
+                        readingAbstract = true;
+                    } else {
+                        // If title is not set, treat line as title
+                        if (title == null) {
+                            title = line.trim();
+                        } else if (readingAbstract) {
+                            // Continue collecting abstract
+                            abstractBuilder.append(line).append("\n");
+                        } else {
+                            // Append to authorsBuilder until a new section begins
+                            authorsBuilder.append(line.trim()).append("\n");
+                        }
+                    }
                 }
+
+                // Add the last investigation after exiting the loop
+                if (title != null) {
+                    // Convert keywordsList to String[]
+                    String[] keywordsArray = keywordsList.toArray(new String[0]);
+
+                    Investigation investigation = new Investigation(title.trim(),
+                            parseAuthors(authorsBuilder.toString().trim()),
+                            abstractBuilder.toString().trim(),
+                            keywordsArray);
+                    investigations.add(investigation);
+                }
+
+                // Print all investigations for testing
+                printInvestigations(investigations);
+
             } catch (IOException e) {
                 System.err.println("Error reading file: " + e.getMessage());
             }
@@ -39,8 +109,29 @@ public class Functions {
             System.err.println("Error: " + fileName + " not found in the current directory.");
         }
     }
-}
 
+    // Helper method to parse authors and return as String array
+    private static String[] parseAuthors(String authorsString) {
+        return authorsString.split("\n");
+    }
+
+    // Helper method to print investigations (for testing)
+    private static void printInvestigations(List<Investigation> investigations) {
+        for (Investigation investigation : investigations) {
+            System.out.println("Title: " + investigation.getTitle());
+            System.out.println("Authors:");
+            for (String author : investigation.getAuthors()) {
+                System.out.println(author);
+            }
+            System.out.println("Abstract: " + investigation.getText());
+            System.out.print("Keywords: ");
+            for (int i = 0; i < investigation.getKeywords().length; i++) {
+                if (i > 0) {
+                    System.out.print(", ");
+                }
+                System.out.print(investigation.getKeywords()[i]);
+            }
+            System.out.println("\n--------------------");
+        }
+    }
 }
-    
-   
