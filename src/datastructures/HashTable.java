@@ -6,13 +6,20 @@
 package datastructures;
 
 /**
+ * Hash Table class, built from an array of elements of type E.
  *
  * @author ayahzaheraldeen
  * @author Alejandro Loutphi
  */
 public class HashTable<E> {
+
     private GenericArray<LinkedList<HashTableEntry<E>>> table;
 
+    /**
+     * Constructs hash table with passed-in length.
+     *
+     * @param length length of hash table
+     */
     public HashTable(int length) {
         this.table = new GenericArray<>(length);
         for (int i = 0; i < this.table.length(); i++) {
@@ -20,34 +27,70 @@ public class HashTable<E> {
         }
     }
 
-    public int generateHash(String input) {
-        // TODO delete
-        return 0;
+    /**
+     * Hash function returning position of element with passed-in key.
+     * 
+     * @param key String to be hashed
+     * @return position of element with passed-in key
+     */
+    public int hash(String key) {
+        int len = key.length();
+        if (len < 3) {
+            return 0;
+        }
 
-        // int hash = 5381; // Initial prime number hash
-        // int n = input.length();
-
-        // for (int i = 0; i < n; i++) {
-        //     hash = ((hash << 5) + hash) + input.charAt(i); /* hash * 33 + c */
-        // }
-
-        // // Ensure hash fits within tableSize using modulo operation
-        // hash = hash % this.table.length();
-        // if (hash < 0) {
-        //     hash += this.table.length(); // Ensure hash is non-negative
-        // }
-
-        // return hash;
+        // Do something kinda random with the first and last few characters
+        int o = key.charAt(0)
+                - 3 * key.charAt(1)
+                + 5 * key.charAt(2)
+                - 9 * key.charAt(len - 3)
+                + 17 * key.charAt(len - 2)
+                - 33 * key.charAt(len - 1);
+        if (o < 0)
+            o = -o;
+        return o % this.length();
     }
 
+    /**
+     * Returns length of hash table.
+     * 
+     * @return length of hash table
+     */
     public int length() {
         return this.table.length();
     }
 
+    /**
+     * Returns GenericArray of the table containing the linked list.
+     * 
+     * @return GenericArray of the table containing the linked list
+     */
     public GenericArray<LinkedList<HashTableEntry<E>>> getTableArray() {
         return this.table;
     }
 
+    /**
+     * Returns true if there are no elements in the table. Otherwise, false.
+     * 
+     * @return true if there are no elements in the table. Otherwise, false
+     */
+    public boolean isEmpty() {
+        for (int i = 0; i < this.table.length(); i++) {
+            if (!this.table.get(i).isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns the element of the input list with the passed-in key or null if there
+     * were no matches.
+     * 
+     * @param key       String key to check for matches
+     * @param entryList list to search in
+     * @return element of the input list with the passed-in key or null if there
+     *         were no matches
+     */
     private E lookUpEntryListFor(String key, LinkedList<HashTableEntry<E>> entryList) {
         HashTableEntry<E> entry;
         if (entryList.isEmpty()) {
@@ -61,29 +104,54 @@ public class HashTable<E> {
         return null;
     }
 
+    /**
+     * Returns the element in the table with the passed-in key or null if there were
+     * no matches.
+     * 
+     * @param key String key to check for matches
+     * @return the element in the table with the passed-in key or null if there were
+     *         no matches
+     */
     public E lookUp(String key) {
-        int hash = this.generateHash(key);
+        int hash = this.hash(key);
         return this.lookUpEntryListFor(key, this.table.get(hash));
     }
 
+    /**
+     * Returns true if there's an element of the input list with the passed-in key.
+     * Otherwise, false.
+     * 
+     * @param key       String key to check for matches
+     * @param entryList list to search in
+     * @return true if there's an element of the input list with the passed-in key.
+     *         Otherwise, false
+     */
     private boolean entryListContains(String key, LinkedList<HashTableEntry<E>> entryList) {
         return this.lookUpEntryListFor(key, entryList) != null;
     }
 
+    /**
+     * Returns true if there's an element in the table with the passed-in key.
+     * Otherwise, false.
+     * 
+     * @param key String key to check for matches
+     * @return true if there's an element in the table with the passed-in key.
+     *         Otherwise, false
+     */
     public boolean contains(String key) {
-        return this.lookUp(key) != null;
+        int hash = this.hash(key);
+        return this.entryListContains(key, this.table.get(hash));
     }
 
-    public boolean isEmpty() {
-        for (int i = 0; i < this.table.length(); i++) {
-            if (!this.table.get(i).isEmpty())
-                return false;
-        }
-        return true;
-    }
-
+    /**
+     * Adds passed-in element to the table.
+     * 
+     * @param key key identifying elt
+     * @param elt element to add
+     * @return true if element could be added. Otherwise, false
+     */
     public boolean add(String key, E elt) {
-        int hash = this.generateHash(key);
+        int hash = this.hash(key);
         LinkedList<HashTableEntry<E>> entryList = this.table.get(hash);
         if (this.entryListContains(key, entryList)) {
             return false;
