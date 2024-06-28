@@ -31,13 +31,13 @@ public class Investigation {
      *
      * @param title abstract title
      * @param authors String[] with abstract authors
-     * @param text abstract text
+     * @param abstractBody abstract text
      * @param keywords String[] with abstract keywords
      */
-    public Investigation(String title, String[] authors, String text, String[] keywords) {
+    public Investigation(String title, String[] authors, String abstractBody, String[] keywords) {
         this.title = title;
         this.authors = authors;
-        this.text = text;
+        this.text = abstractBody;
         this.keywords = keywords;
     }
 

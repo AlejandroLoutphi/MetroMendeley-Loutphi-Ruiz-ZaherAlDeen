@@ -12,7 +12,7 @@ package datastructures;
  * @author Alejandro Loutphi
  */
 public class HashTable<E> {
-
+  
     private GenericArray<LinkedList<HashTableEntry<E>>> table;
 
     /**
