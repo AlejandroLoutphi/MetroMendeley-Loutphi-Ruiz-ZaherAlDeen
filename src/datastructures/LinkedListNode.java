@@ -96,7 +96,7 @@ public class LinkedListNode<E> {
      * @return true if the node points to a next element. Otherwise, false
      */
     public boolean hasNext() {
-        return this.next == null;
+        return this.next != null;
     }
 
     /**
