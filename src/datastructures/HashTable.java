@@ -8,92 +8,87 @@ package datastructures;
 /**
  *
  * @author ayahzaheraldeen
+ * @author Alejandro Loutphi
  */
-import java.util.HashMap;
-import metromendeleyloutphiruizzaheraldeen.Investigation;
+public class HashTable<E> {
+    private GenericArray<LinkedList<HashTableEntry<E>>> table;
 
-public class HashFunction {
-    // Example: Simulating a hash table with an array
-    private HashMap<Integer, Investigation> hashTable;
-    private int tableSize;
-
-    public HashFunction(int size) {
-        tableSize = size;
-        hashTable = new HashMap<>();
+    public HashTable(int length) {
+        this.table = new GenericArray<>(length);
+        for (int i = 0; i < this.table.length(); i++) {
+            this.table.set(i, new LinkedList<HashTableEntry<E>>());
+        }
     }
 
     public int generateHash(String input) {
-        int hash = 5381; // Initial prime number hash
-        int n = input.length();
+        // TODO delete
+        return 0;
 
-        for (int i = 0; i < n; i++) {
-            hash = ((hash << 5) + hash) + input.charAt(i); /* hash * 33 + c */
+        // int hash = 5381; // Initial prime number hash
+        // int n = input.length();
+
+        // for (int i = 0; i < n; i++) {
+        //     hash = ((hash << 5) + hash) + input.charAt(i); /* hash * 33 + c */
+        // }
+
+        // // Ensure hash fits within tableSize using modulo operation
+        // hash = hash % this.table.length();
+        // if (hash < 0) {
+        //     hash += this.table.length(); // Ensure hash is non-negative
+        // }
+
+        // return hash;
+    }
+
+    public int length() {
+        return this.table.length();
+    }
+
+    public GenericArray<LinkedList<HashTableEntry<E>>> getTableArray() {
+        return this.table;
+    }
+
+    private E lookUpEntryListFor(String key, LinkedList<HashTableEntry<E>> entryList) {
+        HashTableEntry<E> entry;
+        if (entryList.isEmpty()) {
+            return null;
         }
-
-        // Ensure hash fits within tableSize using modulo operation
-        hash = hash % tableSize;
-        if (hash < 0) {
-            hash += tableSize; // Ensure hash is non-negative
+        for (LinkedListNode<HashTableEntry<E>> i = entryList.getHead(); i != null; i = i.getNext()) {
+            entry = i.getElt();
+            if (entry.getKey().equals(key))
+                return entry.getElt();
         }
-
-        return hash;
+        return null;
     }
 
-    // Method to add an entry (Investigation object) to the hash table
-    public void addEntry(String key, Investigation value) {
-        int hash = generateHash(key);
-        hashTable.put(hash, value);
+    public E lookUp(String key) {
+        int hash = this.generateHash(key);
+        return this.lookUpEntryListFor(key, this.table.get(hash));
     }
 
-    // Method to retrieve an Investigation object from the hash table by title
-    public Investigation getAbstract(String key) {
-        int hash = generateHash(key);
-        return hashTable.get(hash);
+    private boolean entryListContains(String key, LinkedList<HashTableEntry<E>> entryList) {
+        return this.lookUpEntryListFor(key, entryList) != null;
     }
 
-    // Method to check if the hash table contains a specific investigation title
-    public boolean containsAbstract(String key) {
-        int hash = generateHash(key);
-        return hashTable.containsKey(hash);
+    public boolean contains(String key) {
+        return this.lookUp(key) != null;
     }
 
-    // Example method to check if the hash table is empty
     public boolean isEmpty() {
-        return hashTable.isEmpty();
+        for (int i = 0; i < this.table.length(); i++) {
+            if (!this.table.get(i).isEmpty())
+                return false;
+        }
+        return true;
     }
 
-    public static void main(String[] args) {
-        HashFunction hasher = new HashFunction(100); // Assuming table size is 100
-
-        // Example investigation
-        String abstractTitle = "Example Investigation 1";
-        String[] authors = {"Author 1", "Author 2"};
-        String abstractText = "This is the abstract of Example Investigation 1.";
-        String[] keywords = {"Keyword 1", "Keyword 2"};
-
-        // Create an Investigation object
-        Investigation investigation = new Investigation(abstractTitle, authors, abstractText, keywords);
-
-        // Generate hash and add entry to hash table
-        int hashValue = hasher.generateHash(abstractTitle);
-        hasher.addEntry(abstractTitle, investigation);
-
-        // Retrieve Investigation object by title
-        Investigation retrievedInvestigation = hasher.getAbstract(abstractTitle);
-
-        // Print investigation details
-        if (retrievedInvestigation != null) {
-            System.out.println("Investigation Title: " + retrievedInvestigation.getTitle());
-            System.out.println("Authors: " + String.join(", ", retrievedInvestigation.getAuthors()));
-            System.out.println("Abstract: " + retrievedInvestigation.getText());
-            System.out.println("Keywords: " + String.join(", ", retrievedInvestigation.getKeywords()));
-        } else {
-            System.out.println("Investigation with title '" + abstractTitle + "' not found.");
+    public boolean add(String key, E elt) {
+        int hash = this.generateHash(key);
+        LinkedList<HashTableEntry<E>> entryList = this.table.get(hash);
+        if (this.entryListContains(key, entryList)) {
+            return false;
         }
-
-        // Check if hash table is empty
-        System.out.println("Is hash table empty? " + hasher.isEmpty()); // Should print false
+        entryList.addAtHead(new HashTableEntry<>(key, elt));
+        return true;
     }
 }
-
-    

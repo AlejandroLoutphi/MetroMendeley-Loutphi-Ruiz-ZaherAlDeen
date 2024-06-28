@@ -54,6 +54,15 @@ public class LinkedList<E> {
     }
 
     /**
+     * Returns true if there are no elements in the list. Otherwise false.
+     * 
+     * @return true if there are no elements in the list. Otherwise false
+     */
+    public boolean isEmpty() {
+        return this.getHead() == null;
+    }
+
+    /**
      * Sets the passed node as the first node in the list.
      * Does not change next attribute of new head to be the one of the old head.
      * 
@@ -74,15 +83,6 @@ public class LinkedList<E> {
         if (!this.isEmpty())
             next = this.getHead().getNext();
         this.head = new LinkedListNode<E>(elt, next);
-    }
-
-    /**
-     * Returns true if there are no elements in the list. Otherwise false.
-     * 
-     * @return true if there are no elements in the list. Otherwise false
-     */
-    public boolean isEmpty() {
-        return this.getHead() == null;
     }
 
     /**
@@ -232,5 +232,10 @@ public class LinkedList<E> {
         if (n < 0)
             return false;
         return this.getHead().setAsEnd(n, elt);
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> a = new LinkedList<>();
+        a.addAtHead(4);
     }
 }
