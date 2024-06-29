@@ -6,20 +6,21 @@ package datastructures;
 
 /**
  * Class for storing a key, and a pointer to an object stored in a hash table.
+ * Part of a LinkedList.
  *
  * @author Alejandro Loutphi
+ * @param <E> type of element to store
  */
-public class HashTableEntry<E> {
+public class HashTableEntry<E> extends LinkedListNode<E> {
 
     String key;
-    E elt;
 
     /**
      * Construct a HashTableEntry with all attributes set to null.
      */
     public HashTableEntry() {
+        super();
         this.key = null;
-        this.elt = null;
     }
 
     /**
@@ -29,8 +30,8 @@ public class HashTableEntry<E> {
      * @param elt element stored in the HashTableEntry
      */
     public HashTableEntry(String key, E elt) {
+        super(elt, null);
         this.key = key;
-        this.elt = elt;
     }
 
     /**
@@ -40,14 +41,5 @@ public class HashTableEntry<E> {
      */
     public String getKey() {
         return key;
-    }
-
-    /**
-     * Returns the element stored in this object.
-     * 
-     * @return the element stored in this object
-     */
-    public E getElt() {
-        return elt;
     }
 }

@@ -9,6 +9,7 @@ package datastructures;
  * pointers for generics.
  *
  * @author Alejandro Loutphi
+ * @param <E> type of element to store
  */
 public class Box<E> {
 

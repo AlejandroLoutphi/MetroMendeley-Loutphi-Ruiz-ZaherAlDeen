@@ -6,13 +6,14 @@ package datastructures;
 
 /**
  * Class for storing arrays that involve generics in their definition, because
- * Java doesn't natively support that.
+ * Java doesn't support that.
  *
  * @author Alejandro Loutphi
+ * @param <E> type of elements to store
  */
 public class GenericArray<E> {
 
-    private final Object[] arr;
+    private Object[] arr;
 
     /**
      * Constructs an array of null.
