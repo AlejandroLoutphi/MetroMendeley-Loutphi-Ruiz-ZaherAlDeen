@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import datastructures.LinkedList;
+import datastructures.LinkedListNode;
 
 public class Functions {
 
@@ -133,5 +135,42 @@ public class Functions {
             }
             System.out.println("\n--------------------");
         }
+    }
+
+    /**
+     * Returns a String with an analysis of the passed-in Investigation using the following format:
+     * <pre>
+     * Investigation Title
+     * Autores: (authors)
+     * palabra clave 1: (frequency of keyword 1)
+     * palabra clave 2: (frequency of keyword 2)
+     * ...
+     * </pre>
+     *
+     * @param inv Investigation to analyze
+     * @param keywords list of all keywords to present
+     * @return String with the analysis
+     */
+    public static String analysis(Investigation inv, LinkedList<String> keywords) {
+        StringBuilder o = new StringBuilder();
+        o.append(inv.title);
+        o.append("\nAutores: ");
+        for (int i = 0; i < inv.authors.length-1; i++) {
+            o.append(inv.authors[i]);
+            o.append(", ");
+        }
+        o.append(inv.authors[inv.authors.length-1]);
+
+        int counter = 1;
+        for (LinkedListNode<String> i = keywords.getHead();
+                i != null;
+                i = i.getNext()) {
+            o.append("\npalabra clave ");
+            o.append(counter);
+            o.append(": ");
+            o.append(inv.frequency(i.getElt()));
+            counter++;
+        }
+        return o.toString();
     }
 }
