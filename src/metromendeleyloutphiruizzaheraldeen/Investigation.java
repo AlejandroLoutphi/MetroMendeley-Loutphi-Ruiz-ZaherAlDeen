@@ -11,10 +11,10 @@ package metromendeleyloutphiruizzaheraldeen;
  */
 public class Investigation {
 
-    String title;
-    String[] authors;
-    String text;
-    String[] keywords;
+    private String title;
+    private String[] authors;
+    private String text;
+    private String[] keywords;
 
     /**
      * Constructs an Abstract with all attributes set to null.
