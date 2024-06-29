@@ -40,7 +40,6 @@ public class Functions {
 
                     // Check for markers and collect data accordingly
                     if (line.startsWith("Autores")) {
-                        // If title has been set, create previous investigation
                         if (title != null) {
                             // Convert keywordsList to String[]
                             String[] keywordsArray = keywordsList.toArray(new String[0]);
@@ -58,8 +57,9 @@ public class Functions {
                             keywordsList.clear();
                         }
 
-                        // Set the title for the new investigation
-                        title = null;
+                        // Set the title for the next investigation
+                        // Title is the last non-empty line before "Autores"
+                        title = getLastNonEmptyLineBeforeAutores(reader);
                         readingAbstract = false;
                     } else if (line.startsWith("Palabras Claves")) {
                         // Start collecting keywords
@@ -73,7 +73,7 @@ public class Functions {
                         abstractBuilder.append(line.substring("Resumen".length())).append("\n");
                         readingAbstract = true;
                     } else {
-                        // If title is not set, treat line as title
+                        // If title has not been set yet, treat this line as the title
                         if (title == null) {
                             title = line.trim();
                         } else if (readingAbstract) {
@@ -117,21 +117,47 @@ public class Functions {
 
     // Helper method to print investigations (for testing)
     private static void printInvestigations(List<Investigation> investigations) {
-        for (Investigation investigation : investigations) {
-            System.out.println("Title: " + investigation.getTitle());
-            System.out.println("Authors:");
-            for (String author : investigation.getAuthors()) {
-                System.out.println(author);
-            }
-            System.out.println("Abstract: " + investigation.getText());
-            System.out.print("Keywords: ");
-            for (int i = 0; i < investigation.getKeywords().length; i++) {
-                if (i > 0) {
-                    System.out.print(", ");
-                }
-                System.out.print(investigation.getKeywords()[i]);
-            }
-            System.out.println("\n--------------------");
+    for (Investigation investigation : investigations) {
+        System.out.println("Title: " + investigation.getTitle());
+        
+        // Print Authors
+        System.out.println("Authors:");
+        for (String author : investigation.getAuthors()) {
+            System.out.println(author);
         }
+        
+        // Print Abstract
+        System.out.println("Abstract: " + investigation.getText());
+        
+        // Print Keywords
+        System.out.print("Keywords: ");
+        String[] keywords = investigation.getKeywords();
+        for (int i = 0; i < keywords.length; i++) {
+            if (i > 0) {
+                System.out.print(", ");
+            }
+            System.out.print(keywords[i]);
+        }
+        System.out.println("\n--------------------");
+    }
+}
+
+    // Helper method to get the last non-empty line before "Autores"
+    private static String getLastNonEmptyLineBeforeAutores(BufferedReader reader) throws IOException {
+        String line;
+        String title = null;
+
+        // Read lines until "Autores" or end of file is encountered
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("Autores")) {
+                break; // Found the line before "Autores", stop reading
+            }
+            // Store the last non-empty line as potential title
+            if (!line.trim().isEmpty()) {
+                title = line.trim();
+            }
+        }
+
+        return title;
     }
 }
