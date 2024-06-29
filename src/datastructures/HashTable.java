@@ -11,19 +11,17 @@ package datastructures;
  * @author ayahzaheraldeen
  * @author Alejandro Loutphi
  */
-public class HashTable<E> {
+public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
   
-    private GenericArray<LinkedList<HashTableEntry<E>>> table;
-
     /**
      * Constructs hash table with passed-in length.
      *
      * @param length length of hash table
      */
     public HashTable(int length) {
-        this.table = new GenericArray<>(length);
-        for (int i = 0; i < this.table.length(); i++) {
-            this.table.set(i, new LinkedList<HashTableEntry<E>>());
+        super(length);
+        for (int i = 0; i < this.length(); i++) {
+            this.set(i, new LinkedList<HashTableEntry<E>>());
         }
     }
 
@@ -52,31 +50,13 @@ public class HashTable<E> {
     }
 
     /**
-     * Returns length of hash table.
-     * 
-     * @return length of hash table
-     */
-    public int length() {
-        return this.table.length();
-    }
-
-    /**
-     * Returns GenericArray of the table containing the linked list.
-     * 
-     * @return GenericArray of the table containing the linked list
-     */
-    public GenericArray<LinkedList<HashTableEntry<E>>> getTableArray() {
-        return this.table;
-    }
-
-    /**
      * Returns true if there are no elements in the table. Otherwise, false.
      * 
      * @return true if there are no elements in the table. Otherwise, false
      */
     public boolean isEmpty() {
-        for (int i = 0; i < this.table.length(); i++) {
-            if (!this.table.get(i).isEmpty())
+        for (int i = 0; i < this.length(); i++) {
+            if (!this.get(i).isEmpty())
                 return false;
         }
         return true;
@@ -114,7 +94,7 @@ public class HashTable<E> {
      */
     public E lookUp(String key) {
         int hash = this.hash(key);
-        return this.lookUpEntryListFor(key, this.table.get(hash));
+        return this.lookUpEntryListFor(key, this.get(hash));
     }
 
     /**
@@ -140,7 +120,7 @@ public class HashTable<E> {
      */
     public boolean contains(String key) {
         int hash = this.hash(key);
-        return this.entryListContains(key, this.table.get(hash));
+        return this.entryListContains(key, this.get(hash));
     }
 
     /**
@@ -152,7 +132,7 @@ public class HashTable<E> {
      */
     public boolean add(String key, E elt) {
         int hash = this.hash(key);
-        LinkedList<HashTableEntry<E>> entryList = this.table.get(hash);
+        LinkedList<HashTableEntry<E>> entryList = this.get(hash);
         if (this.entryListContains(key, entryList)) {
             return false;
         }
