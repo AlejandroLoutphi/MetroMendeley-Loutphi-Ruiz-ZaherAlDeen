@@ -6,12 +6,13 @@
 package datastructures;
 
 /**
- * Hash Table class, built from an array of elements of type E.
+ * Hash Table class, built from an array of lists of elements of type E.
  *
  * @author ayahzaheraldeen
  * @author Alejandro Loutphi
+ * @param <E> type of elements to store
  */
-public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
+public class HashTable<E> extends GenericArray<LinkedList<E>> {
   
     /**
      * Constructs hash table with passed-in length.
@@ -21,7 +22,7 @@ public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
     public HashTable(int length) {
         super(length);
         for (int i = 0; i < this.length(); i++) {
-            this.set(i, new LinkedList<HashTableEntry<E>>());
+            this.set(i, new LinkedList<>());
         }
     }
 
@@ -71,15 +72,15 @@ public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
      * @return element of the input list with the passed-in key or null if there
      *         were no matches
      */
-    private E lookUpEntryListFor(String key, LinkedList<HashTableEntry<E>> entryList) {
-        HashTableEntry<E> entry;
+    private E lookUpEntryListFor(String key, LinkedList<E> entryList) {
         if (entryList.isEmpty()) {
             return null;
         }
-        for (LinkedListNode<HashTableEntry<E>> i = entryList.getHead(); i != null; i = i.getNext()) {
-            entry = i.getElt();
-            if (entry.getKey().equals(key))
-                return entry.getElt();
+        for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead();
+                i != null;
+                i = (HashTableEntry<E>) i.getNext()) {
+            if (i.getKey().equals(key))
+                return i.getElt();
         }
         return null;
     }
@@ -106,7 +107,7 @@ public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
      * @return true if there's an element of the input list with the passed-in key.
      *         Otherwise, false
      */
-    private boolean entryListContains(String key, LinkedList<HashTableEntry<E>> entryList) {
+    private boolean entryListContains(String key, LinkedList<E> entryList) {
         return this.lookUpEntryListFor(key, entryList) != null;
     }
 
@@ -132,7 +133,7 @@ public class HashTable<E> extends GenericArray<LinkedList<HashTableEntry<E>>> {
      */
     public boolean add(String key, E elt) {
         int hash = this.hash(key);
-        LinkedList<HashTableEntry<E>> entryList = this.get(hash);
+        LinkedList<E> entryList = this.get(hash);
         if (this.entryListContains(key, entryList)) {
             return false;
         }

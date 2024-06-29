@@ -73,19 +73,6 @@ public class LinkedList<E> {
     }
 
     /**
-     * Sets a new node with the passed element as the first node of the list.
-     * Preserves all nodes beyond the first node.
-     * 
-     * @param elt element of the new head node
-     */
-    public void setHead(E elt) {
-        LinkedListNode<E> next = null;
-        if (!this.isEmpty())
-            next = this.getHead().getNext();
-        this.head = new LinkedListNode<E>(elt, next);
-    }
-
-    /**
      * Returns the amount of elements in the list.
      * 
      * @return amount of elements in the list
@@ -180,6 +167,17 @@ public class LinkedList<E> {
     }
 
     /**
+     * Adds passed-in node at the start of the list.
+     * Shifts indeces of all elements by 1.
+     * 
+     * @param node node to add
+     */
+    public void addAtHead(LinkedListNode<E> node) {
+        node.setNext(this.getHead());
+        this.setHead(node);
+    }
+
+    /**
      * Removes element at the specified index.
      * Shifts indeces of all elements after the specified index by -1.
      * 
@@ -232,10 +230,5 @@ public class LinkedList<E> {
         if (n < 0)
             return false;
         return this.getHead().setAsEnd(n, elt);
-    }
-
-    public static void main(String[] args) {
-        LinkedList<Integer> a = new LinkedList<>();
-        a.addAtHead(4);
     }
 }
