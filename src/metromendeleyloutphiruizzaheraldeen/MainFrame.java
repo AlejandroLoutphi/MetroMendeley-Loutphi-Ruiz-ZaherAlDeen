@@ -33,11 +33,23 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         AddAbstract = new javax.swing.JButton();
         LoadAbstract = new javax.swing.JButton();
         InstructionsButton = new javax.swing.JButton();
+        SearchHash = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        SearchedTitle = new javax.swing.JTextField();
+        SearchedAuthor = new javax.swing.JTextField();
+        SearchedKeyword = new javax.swing.JLabel();
+        SearchedWord = new javax.swing.JTextField();
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,7 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         AddAbstract.setText("Agregar Resumen");
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         LoadAbstract.setText("Cargar Resumen");
         LoadAbstract.addActionListener(new java.awt.event.ActionListener() {
@@ -56,10 +68,45 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
 
         InstructionsButton.setText("Instrucciones");
-        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
+
+        SearchHash.setText("Buscar");
+        SearchHash.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchHashActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+
+        jLabel2.setText("Buscar Por:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        jLabel3.setText("Titulo:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jLabel4.setText("Autor:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel1.add(SearchedTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        SearchedAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchedAuthorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SearchedAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+
+        SearchedKeyword.setText("Palabra Clave:");
+        jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        SearchedWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchedWordActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -101,6 +148,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_LoadAbstractActionPerformed
 
+    private void SearchHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHashActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchHashActionPerformed
+
+    private void SearchedAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchedAuthorActionPerformed
+
+    private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedWordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchedWordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -141,7 +200,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton AddAbstract;
     private javax.swing.JButton InstructionsButton;
     private javax.swing.JButton LoadAbstract;
+    private javax.swing.JButton SearchHash;
+    private javax.swing.JTextField SearchedAuthor;
+    private javax.swing.JLabel SearchedKeyword;
+    private javax.swing.JTextField SearchedTitle;
+    private javax.swing.JTextField SearchedWord;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
