@@ -4,6 +4,13 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
+import javax.swing.JFileChooser;
+
+import java.io.File;
+import javax.swing.*;
+import java.io.File;
+
+
 /**
  *
  * @author ayahzaheraldeen
@@ -41,7 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         AddAbstract.setText("Agregar Resumen");
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         LoadAbstract.setText("Cargar Resumen");
         LoadAbstract.addActionListener(new java.awt.event.ActionListener() {
@@ -49,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
         InstructionsButton.setText("Instrucciones");
         jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
@@ -61,6 +68,37 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void LoadAbstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadAbstractActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Check if the file has .txt extension
+            if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
+                JOptionPane.showMessageDialog(this,
+                        "Error: archivo debe ser del formato .txt",
+                        "Error Cargando Archivo", JOptionPane.ERROR_MESSAGE);
+                return; // Exit method if format is incorrect
+            }
+
+            // Call uploadFile method from Functions class
+            try {
+                Functions.uploadFile(selectedFile.getAbsolutePath());
+                JOptionPane.showMessageDialog(this,
+                        "Archivo Cargado Exitosamente!: " + selectedFile.getAbsolutePath(),
+                        "Archivo Cargado Exitosamente", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Error: " + ex.getMessage(),
+                        "Error Cargando archivo", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            System.out.println("Selecion de archivo cancelado.");
+        }
+    
+       
+
     }//GEN-LAST:event_LoadAbstractActionPerformed
 
     /**
@@ -96,7 +134,8 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
-    }
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAbstract;
