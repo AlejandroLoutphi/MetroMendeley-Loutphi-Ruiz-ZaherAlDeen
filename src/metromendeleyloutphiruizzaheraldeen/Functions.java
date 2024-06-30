@@ -4,13 +4,16 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import datastructures.LinkedList;
 import datastructures.LinkedListNode;
 import datastructures.HashTable;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Functions {
 
@@ -177,6 +180,25 @@ public class Functions {
             }
         } catch (java.io.IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
+    
+     public static String readFileToString(File file) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n"); // Append each line to the StringBuilder
+            }
+        }
+        return sb.toString();
+    }
+
+
+public static void appendToFile(String fileName, String content) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            writer.write(content); // Write the content to the file
+            writer.newLine(); // Add a new line at the end (optional)
         }
     }
 }
