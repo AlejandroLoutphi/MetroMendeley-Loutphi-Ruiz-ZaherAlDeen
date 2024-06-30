@@ -146,4 +146,37 @@ public class Functions {
         }
         return o.toString();
     }
+
+
+      public static void uploadFile(String filePath) {
+        File fileToUpload = new File(filePath);
+        if (!fileToUpload.exists()) {
+            System.err.println("File not found: " + filePath);
+            return;
+        }
+        if (!filePath.toLowerCase().endsWith(".txt")) {
+            System.err.println("Error: File format must be .txt");
+            return;
+        }
+        // Perform further operations with the file as needed
+        processFile(fileToUpload); 
+        
+        System.out.println("File uploaded successfully: " + filePath);
+    // Example: Call a method to process the file
+    }
+
+    public static void processFile(File file) {
+        // Implement file processing logic here
+        try {
+            // Example: Read lines from the file
+            java.nio.file.Path path = file.toPath();
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            for (String line : lines) {
+                System.out.println(line);
+                // Process each line of the file as needed
+            }
+        } catch (java.io.IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
 }
