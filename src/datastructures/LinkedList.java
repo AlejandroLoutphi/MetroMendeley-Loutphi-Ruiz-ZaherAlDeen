@@ -231,4 +231,18 @@ public class LinkedList<E> {
             return false;
         return this.getHead().setAsEnd(n, elt);
     }
+
+    /**
+     * Puts the elements of the list (that can fit) into the passed-in array.
+     * @param o array to write
+     */
+    public void putInArray(E[] o) {
+        int counter = 0;
+        for (LinkedListNode<E> i = this.getHead(); i != null; i = i.getNext()) {
+            if (counter >= o.length)
+                break;
+            o[counter] = i.getElt();
+            counter++;
+        }
+    }
 }

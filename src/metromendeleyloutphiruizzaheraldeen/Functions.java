@@ -4,7 +4,6 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,31 +11,41 @@ import java.io.IOException;
 import datastructures.LinkedList;
 import datastructures.LinkedListNode;
 import datastructures.HashTable;
+import datastructures.HashTableEntry;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
+/**
+ *
+ * @author ayahzaheraldeen
+ * @author Alejandro Loutphi
+ */
 public class Functions {
 
+    private String newText;
+    // TODO tests hash table to be the correct size
+    private HashTable<Investigation> tableByTitle;
+    private HashTable<LinkedList<Investigation>> tableByKeyword;
+    private HashTable<LinkedList<Investigation>> tableByAuthor;
+
     /**
-     * Reads a file named Investigations.txt and returns a HashTable of the
-     * Investigation objects it describes.
+     * Reads a file named Investigations.txt and stores their contents in this object's HashTable's
      * 
-     * @return a HashTable of the Investigation objects it describes
+     * @return true if the function succeeded. Otherwise, false
      */
-    public static HashTable<Investigation> buildHashTable() {
+    public boolean buildHashTables() {
         File file = new File("Investigations.txt");
 
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
-                int counter = 0;
                 LinkedList<String> authorList = new LinkedList<>();
-                String[] authorArray;
+                String[] authorArray = new String[0];
                 int authorLen = 0;
+                String[] keywordArray;
                 int state = 0;
                 Investigation investigation = new Investigation();
-                // TODO tests hash table to be the correct size
-                HashTable<Investigation> o = new HashTable<>(32);
 
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
@@ -65,17 +74,12 @@ public class Functions {
                             }
                             authorList.add(line);
                             authorLen++;
+                            this.tableByAuthor.add(line, new LinkedList<>());
                             break;
 
                         case 2:
                             authorArray = new String[authorLen];
-                            counter = 0;
-                            for (LinkedListNode<String> i = authorList.getHead(); i != null; i = i.getNext()) {
-                                if (counter >= authorLen)
-                                    break;
-                                authorArray[counter] = i.getElt();
-                                counter++;
-                            }
+                            authorList.putInArray(authorArray);
                             investigation.setAuthors(authorArray);
                             investigation.setText(line);
                             state = 3;
@@ -86,30 +90,44 @@ public class Functions {
                             if (keywordsLine.charAt(keywordsLine.length() - 1) == '.') {
                                 keywordsLine = keywordsLine.substring(0, keywordsLine.length() - 1);
                             }
-                            investigation.setKeywords(keywordsLine.split(", "));
-
+                            keywordArray = keywordsLine.split(", ");
+                            investigation.setKeywords(keywordArray);
+                            for (int i = 0; i < keywordArray.length; i++) {
+                                this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
+                            }
                             state = 0;
-                            o.add(investigation.getTitle(), investigation);
+                            this.tableByTitle.add(investigation.getTitle(), investigation);
+                            for (int i = 0; i < authorArray.length; i++) {
+                                this.tableByAuthor.lookUp(authorArray[i]).addAtHead(investigation);
+                            }
+                            for (int i = 0; i < this.tableByKeyword.length(); i++) {
+                                for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword.get(i).getHead();
+                                        j != null;
+                                        j = (HashTableEntry<LinkedList<Investigation>>) j.getNext()) {
+                                    if (investigation.contains(j.getKey()))
+                                        j.getElt().addAtHead(investigation);
+                                }
+                            }
                             break;
 
                         default:
                             // TODO change
                             System.err.println("Error: Invalid State at parse");
-                            return null;
+                            return false;
                     }
                 }
 
-                return o;
+                return true;
 
             } catch (IOException e) {
                 // TODO change
                 System.err.println("Error reading file: " + e.getMessage());
-                return null;
+                return false;
             }
         } else {
             // TODO change
             System.err.println("Error: file not found in the current directory.");
-            return null;
+            return false;
         }
     }
 
@@ -129,7 +147,7 @@ public class Functions {
      * @param keywords list of all keywords to present
      * @return String with the analysis
      */
-    public static String analysis(Investigation inv, LinkedList<String> keywords) {
+    public String analysis(Investigation inv) {
         StringBuilder o = new StringBuilder();
         o.append(inv.getTitle());
         o.append("\nAutores: ");
@@ -140,50 +158,125 @@ public class Functions {
         o.append(inv.getAuthors()[inv.getAuthors().length - 1]);
 
         int counter = 1;
-        for (LinkedListNode<String> i = keywords.getHead(); i != null; i = i.getNext()) {
-            o.append("\npalabra clave ");
-            o.append(counter);
-            o.append(": ");
-            o.append(inv.frequency(i.getElt()));
-            counter++;
+        for (int i = 0; i < this.tableByKeyword.length(); i++) {
+            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword.get(i).getHead();
+                    j != null;
+                    j = (HashTableEntry<LinkedList<Investigation>>) j.getNext()) {
+                o.append("\npalabra clave ");
+                o.append(counter);
+                o.append(" (");
+                o.append(j.getKey());
+                o.append("): ");
+                o.append(inv.frequency(j.getKey()));
+                counter++;
+            }
         }
         return o.toString();
     }
 
-
-      public static void uploadFile(String filePath) {
+    public void uploadFile(String filePath) {
         File fileToUpload = new File(filePath);
         if (!fileToUpload.exists()) {
+            // TODO replace
             System.err.println("File not found: " + filePath);
             return;
         }
         if (!filePath.toLowerCase().endsWith(".txt")) {
+            // TODO replace
             System.err.println("Error: File format must be .txt");
             return;
         }
-        // Perform further operations with the file as needed
-        processFile(fileToUpload); 
-        
-        System.out.println("File uploaded successfully: " + filePath);
-    // Example: Call a method to process the file
+        addFileToHashTables(fileToUpload);
     }
 
-    public static void processFile(File file) {
-        // Implement file processing logic here
-        try {
-            // Example: Read lines from the file
-            java.nio.file.Path path = file.toPath();
-            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
-            for (String line : lines) {
-                System.out.println(line);
-                // Process each line of the file as needed
+    public boolean addFileToHashTables(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            LinkedList<String> authorList = new LinkedList<>();
+            String[] authorArray = new String[0];
+            int authorLen = 0;
+            String[] keywordArray;
+            int state = 0;
+            Investigation investigation = new Investigation();
+
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                // Skip empty lines
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                switch (state) {
+                    case 0:
+                        investigation = new Investigation();
+                        authorList = new LinkedList<>();
+                        authorLen = 0;
+
+                        investigation.setTitle(line);
+                        state = 1;
+                        break;
+
+                    case 1:
+                        if (line.startsWith("Autores")) {
+                            continue;
+                        }
+                        if (line.startsWith("Resumen")) {
+                            state = 2;
+                            continue;
+                        }
+                        authorList.add(line);
+                        authorLen++;
+                        this.tableByAuthor.add(line, new LinkedList<>());
+                        break;
+
+                    case 2:
+                        authorArray = new String[authorLen];
+                        authorList.putInArray(authorArray);
+                        investigation.setAuthors(authorArray);
+                        investigation.setText(line);
+                        state = 3;
+                        break;
+
+                    case 3:
+                        String keywordsLine = line.substring("Palabras Claves: ".length());
+                        if (keywordsLine.charAt(keywordsLine.length() - 1) == '.') {
+                            keywordsLine = keywordsLine.substring(0, keywordsLine.length() - 1);
+                        }
+                        keywordArray = keywordsLine.split(", ");
+                        investigation.setKeywords(keywordArray);
+                        for (int i = 0; i < keywordArray.length; i++) {
+                            this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
+                        }
+                        state = 0;
+                        this.tableByTitle.add(investigation.getTitle(), investigation);
+                        for (int i = 0; i < authorArray.length; i++) {
+                            this.tableByAuthor.lookUp(authorArray[i]).addAtHead(investigation);
+                        }
+                        for (int i = 0; i < this.tableByKeyword.length(); i++) {
+                            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword.get(i).getHead();
+                                    j != null;
+                                    j = (HashTableEntry<LinkedList<Investigation>>) j.getNext()) {
+                                if (investigation.contains(j.getKey()))
+                                    j.getElt().addAtHead(investigation);
+                            }
+                        }
+                        return true;
+
+                    default:
+                        // TODO change
+                        System.err.println("Error: Invalid State at parse");
+                        return false;
+                }
             }
-        } catch (java.io.IOException e) {
+            return false;
+        } catch (IOException e) {
+            // TODO change
             System.err.println("Error reading file: " + e.getMessage());
+            return false;
         }
     }
-    
-     public static String readFileToString(File file) throws IOException {
+
+    public static String readFileToString(File file) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -194,8 +287,7 @@ public class Functions {
         return sb.toString();
     }
 
-
-public static void appendToFile(String fileName, String content) throws IOException {
+    public static void appendToFile(String fileName, String content) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             writer.write(content); // Write the content to the file
             writer.newLine(); // Add a new line at the end (optional)

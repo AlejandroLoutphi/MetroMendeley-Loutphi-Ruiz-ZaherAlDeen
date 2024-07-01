@@ -130,4 +130,29 @@ public class Investigation {
         }
         return o;
     }
+
+    /**
+     * Returns true if the word appears in the title, text, or keywords of the
+     * abstract. Otherwise, false.
+     *
+     * @param word String with the word to look for
+     * @return true if the word appears in the title, text, or keywords of the
+     *         abstract. Otherwise, false
+     */
+    public boolean contains(String word) {
+        int wordLen = word.length();
+        for (int i = 0; i < this.keywords.length; i++) {
+            if (this.keywords[i].equals(word))
+                return true;
+        }
+        for (int i = 0; i < this.title.length() - wordLen + 1; i++) {
+            if (this.title.substring(i, i + wordLen).equals(word))
+                return true;
+        }
+        for (int i = 0; i < this.text.length() - wordLen + 1; i++) {
+            if (this.text.substring(i, i + wordLen).equals(word))
+                return true;
+        }
+        return false;
+    }
 }

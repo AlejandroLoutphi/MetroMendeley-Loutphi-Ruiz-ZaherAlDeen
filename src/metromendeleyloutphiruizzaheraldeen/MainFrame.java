@@ -8,7 +8,6 @@ import javax.swing.JFileChooser;
 
 import java.io.File;
 import javax.swing.*;
-import java.io.File;
 
 
 /**
