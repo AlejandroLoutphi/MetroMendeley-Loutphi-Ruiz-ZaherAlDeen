@@ -231,4 +231,34 @@ public class LinkedList<E> {
             return false;
         return this.getHead().setAsEnd(n, elt);
     }
+    
+    public String[] convertArr()  //Convierte una lista a un Array
+{ 
+  
+    // Find the length of the 
+    // given linked list 
+    int len = this.getHead().size();
+  
+    // Create an array of the 
+    // required length 
+    String []arr = new String[len]; 
+  
+    int index = 0; 
+    LinkedListNode<E>  curr = this.getHead(); 
+  
+    // Traverse the Linked List and add the 
+    // elements to the array one by one 
+    while (curr != null)  
+    { 
+        arr[index++] = (String) curr.getElt(); 
+        curr = curr.getNext(); 
+    } 
+  
+    // Print the created array 
+     for (int i = 0; i < len; i++) {
+        System.out.println(arr[i]+" ");} 
+     return arr;
+} 
+    
+ 
 }
