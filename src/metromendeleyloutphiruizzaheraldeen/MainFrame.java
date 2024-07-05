@@ -66,6 +66,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         AddAbstract.setText("Agregar Resumen");
+        AddAbstract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddAbstractActionPerformed(evt);
+            }
+        });
         jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         LoadAbstract.setText("Cargar Resumen");
@@ -166,6 +171,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedWordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchedWordActionPerformed
+
+    private void AddAbstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAbstractActionPerformed
+        // TODO add your handling code here:
+        AddDirectAbstract addDirectAbstract = new AddDirectAbstract();
+    addDirectAbstract.setVisible(true);
+
+    }//GEN-LAST:event_AddAbstractActionPerformed
 
     /**
      * @param args the command line arguments
