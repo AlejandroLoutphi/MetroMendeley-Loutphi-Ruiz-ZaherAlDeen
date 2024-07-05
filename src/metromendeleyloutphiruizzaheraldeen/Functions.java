@@ -15,6 +15,7 @@ import java.io.BufferedWriter;
 import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
+import datastructures.LinkedListNode;
 
 /**
  * Enum for holding the value of what the text parser functions are currently
@@ -307,91 +308,93 @@ public class Functions {
             throw new IOException();
         }
     }
-    
-public boolean parseAndBuildHashTables(String formattedInfo) {
-    try {
-        String[] lines = formattedInfo.split("\n");  // Split formattedInfo into lines
-        
-        String title = "";
-        LinkedList<String> authorsList = new LinkedList<>();
-        String[] keywords = new String[0];
-        StringBuilder abstractText = new StringBuilder();
-        String[] authorArray = new String[0];
-        int authorlen=0;
-        int state = 0;  // Track the state of parsing
-        
-        for (String line : lines) {
-            line = line.trim();
-            
-            switch (state) {
-                case 0:
-                    title = line;  // First line is the title
-                    state = 1;
-                    break;
-                
-                case 1:
-                    if (line.startsWith("Autores")) {
-                        state = 2;
-                        continue;
-                    }
-                    // Collect authors until "Resumen" is encountered
-                    authorsList.add(line);
-                    authorlen++;
-                    
-                    break;
-                
-                case 2:
-                    authorArray = new String[authorlen];
-                        authorsList.putInArray(authorArray);
-                    if (line.startsWith("Resumen")) {
-                        state = 3;
-                        continue;
-                    }
-                    // Handle continuation of authors list if needed
-                    authorsList.add(line);
-                    break;
-                
-                case 3:
-                    if (line.startsWith("Palabras Claves")) {
-                        String keywordsLine = line.substring("Palabras Claves: ".length());
-                        keywords = keywordsLine.split(", ");
-                        state = 0;  // Reset state after processing keywords
-                    } else {
-                        abstractText.append(line).append("\n");  // Append to abstract text
-                    }
-                    break;
-                
-                default:
-                    // Handle invalid state
-                    System.err.println("Error: Invalid State at parse");
-                    return false;
+
+    public boolean parseAndBuildHashTables(String formattedInfo) {
+        try {
+            String[] lines = formattedInfo.split("\n"); // Split formattedInfo into lines
+
+            String title = "";
+            LinkedList<String> authorsList = new LinkedList<>();
+            String[] keywords = new String[0];
+            StringBuilder abstractText = new StringBuilder();
+            String[] authorArray = new String[0];
+            int authorlen = 0;
+            int state = 0; // Track the state of parsing
+
+            for (String line : lines) {
+                line = line.trim();
+
+                switch (state) {
+                    case 0:
+                        title = line; // First line is the title
+                        state = 1;
+                        break;
+
+                    case 1:
+                        if (line.startsWith("Autores")) {
+                            state = 2;
+                            continue;
+                        }
+                        // Collect authors until "Resumen" is encountered
+                        authorsList.add(line);
+                        authorlen++;
+
+                        break;
+
+                    case 2:
+                        authorArray = new String[authorlen];
+                        if (line.startsWith("Resumen")) {
+                            state = 3;
+                            continue;
+                        }
+                        // Handle continuation of authors list if needed
+                        authorsList.add(line);
+                        break;
+
+                    case 3:
+                        if (line.startsWith("Palabras Claves")) {
+                            String keywordsLine = line.substring("Palabras Claves: ".length());
+                            keywords = keywordsLine.split(", ");
+                            state = 0; // Reset state after processing keywords
+                        } else {
+                            abstractText.append(line).append("\n"); // Append to abstract text
+                        }
+                        break;
+
+                    default:
+                        // Handle invalid state
+                        System.err.println("Error: Invalid State at parse");
+                        return false;
+                }
             }
+
+            // Create an Investigation object
+            Investigation investigation = new Investigation();
+            investigation.setTitle(title);
+            investigation.setAuthors(authorArray);
+            investigation.setText(abstractText.toString().trim());
+            investigation.setKeywords(keywords);
+
+            // Populate hash tables
+            this.tableByTitle.add(title, investigation);
+            String author;
+            // Iterate over linkedlist
+            for (LinkedListNode<String> i = authorsList.getHead(); i != null; i = i.getNext()) {
+                author = i.getElt();
+                this.tableByAuthor.lookUp(author).addAtHead(investigation);
+            }
+            for (String keyword : keywords) {
+                this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            // Handle any exceptions
+            System.err.println("Error parsing formattedInfo: " + e.getMessage());
+            return false;
         }
-        
-        // Create an Investigation object
-        Investigation investigation = new Investigation();
-        investigation.setTitle(title);
-        investigation.setAuthors(authorArray);
-        investigation.setText(abstractText.toString().trim());
-        investigation.setKeywords(keywords);
-        
-        // Populate hash tables
-        this.tableByTitle.add(title, investigation);
-        for (String author : authorsList) {
-            this.tableByAuthor.lookUp(author).addAtHead(investigation);
-        }
-        for (String keyword : keywords) {
-            this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
-        }
-        
-        return true;
-        
-    } catch (Exception e) {
-        // Handle any exceptions
-        System.err.println("Error parsing formattedInfo: " + e.getMessage());
-        return false;
     }
-}
 
     public void appendNewTextToFile() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(INPUT_FILE_NAME, true))) {

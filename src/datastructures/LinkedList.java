@@ -242,6 +242,7 @@ public class LinkedList<E> {
      */
     public void putInArray(E[] o) {
         int counter = 0;
+        // Iterate over linkedlist
         for (LinkedListNode<E> i = this.getHead(); i != null; i = i.getNext()) {
             if (counter >= o.length)
                 break;
