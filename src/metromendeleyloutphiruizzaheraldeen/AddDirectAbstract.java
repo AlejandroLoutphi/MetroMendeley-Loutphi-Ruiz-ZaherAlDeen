@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package metromendeleyloutphiruizzaheraldeen;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +17,73 @@ public class AddDirectAbstract extends javax.swing.JFrame {
      */
     public AddDirectAbstract() {
         initComponents();
+        AddButton = new JButton("Agregar"); // Initialize Add button
+        AddButton.addActionListener(e -> onAddButtonClicked()); // Add action listener
+        jPanel1.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1)); // Add button to panel
+    
+    
     }
+  
+
+
+    private boolean validateFields() {
+        if (TitleFetched.getText().isEmpty() ||
+            TextFetched.getText().isEmpty() ||
+            AuthorsFetched.getText().isEmpty() ||
+            KeywordsFetched.getText().isEmpty()) {
+            return false; // Return false if any field is empty
+        }
+        
+        return true; // All fields are filled
+    }
+    private String getFormattedInformation() {
+    String title = TitleFetched.getText().trim();
+    String authors = AuthorsFetched.getText().trim();
+    String text = TextFetched.getText().trim();
+    String keywords = KeywordsFetched.getText().trim();
+    
+    // Split authors by comma or newline to handle multiple authors
+    String[] authorsArray = authors.split("[,\n]");
+    StringBuilder formattedInfo = new StringBuilder();
+    
+    // Title
+    formattedInfo.append(title).append("\n\n");
+    
+    // Authors
+    formattedInfo.append("Autores").append("\n");
+    for (String author : authorsArray) {
+        formattedInfo.append(author.trim()).append("\n");
+    }
+    
+    
+    // Abstract Text
+    formattedInfo.append("Resumen ").append("\n").append(text).append("\n\n");
+    
+    // Keywords
+    formattedInfo.append("Palabras Claves: ").append(keywords.replace(",", ", ")).append("\n");
+    
+    return formattedInfo.toString();
+}
+
+    private void displayFormattedInfo(String formattedInfo) {
+        // Example: Display formatted information in a message dialog
+        JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
+        // You can also save this information to a file or database here
+    }
+    private void onAddButtonClicked() {
+        if (validateFields()) {
+            String formattedInfo = getFormattedInformation();
+            displayFormattedInfo(formattedInfo); // Display or save formatted information
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void clearFields() {
+    TitleFetched.setText("");
+    AuthorsFetched.setText("");
+    TextFetched.setText("");
+    KeywordsFetched.setText("");
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +94,96 @@ public class AddDirectAbstract extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        TitleFetched = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TextFetched = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        AuthorsFetched = new javax.swing.JTextField();
+        KeywordsFetched = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        AddButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TitleFetched.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TitleFetchedActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TitleFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        jLabel1.setText("Titulo:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel2.setText("Resumen:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        TextFetched.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFetchedActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TextFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 120, 70));
+
+        jLabel3.setText("Autores:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanel1.add(AuthorsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
+        jPanel1.add(KeywordsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, 20));
+
+        jLabel4.setText("Palabras Claves:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        AddButton.setText("Agregar");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        // TODO add your handling code here
+       String formattedInfo = getFormattedInformation();
+    
+    // Example: Print the formatted information to console
+    System.out.println("Formatted Information:");
+    System.out.println(formattedInfo);
+    
+    // Example: Show a message dialog with the formatted information
+    JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
+    
+    // Example: Save the formatted information to a file (adjust this as per your needs)
+    // saveFormattedInfoToFile(formattedInfo);
+    
+    // Optionally, clear the text fields after processing
+    clearFields();
+    }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void TitleFetchedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleFetchedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TitleFetchedActionPerformed
+
+    private void TextFetchedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFetchedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFetchedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,6 +213,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        Functions functions = new Functions();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddDirectAbstract().setVisible(true);
@@ -78,5 +222,15 @@ public class AddDirectAbstract extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddButton;
+    private javax.swing.JTextField AuthorsFetched;
+    private javax.swing.JTextField KeywordsFetched;
+    private javax.swing.JTextField TextFetched;
+    private javax.swing.JTextField TitleFetched;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
