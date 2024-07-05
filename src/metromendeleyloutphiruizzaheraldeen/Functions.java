@@ -284,6 +284,7 @@ public class Functions {
                 sb.append(line).append("\n"); // Append each line to the StringBuilder
             }
         }
+        
         return sb.toString();
     }
 

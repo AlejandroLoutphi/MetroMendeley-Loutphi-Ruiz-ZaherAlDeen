@@ -114,6 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void LoadAbstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadAbstractActionPerformed
         // TODO add your handling code here:
+         Functions functions = new Functions();
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
         
@@ -130,7 +131,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             // Call uploadFile method from Functions class
             try {
-                Functions.uploadFile(selectedFile.getAbsolutePath());
+                functions.uploadFile(selectedFile.getAbsolutePath());
                 JOptionPane.showMessageDialog(this,
                         "Archivo Cargado Exitosamente!: " + selectedFile.getAbsolutePath(),
                         "Archivo Cargado Exitosamente", JOptionPane.INFORMATION_MESSAGE);
@@ -185,7 +186,7 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        Functions functions = new Functions();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
