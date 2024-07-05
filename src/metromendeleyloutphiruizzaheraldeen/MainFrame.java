@@ -16,11 +16,18 @@ import javax.swing.*;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private Functions app;
+
     /**
      * Creates new form MainFrame
+     *
+     * @param app app object
      */
-    public MainFrame() {
+    public MainFrame(Functions app) {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.app = app;
     }
 
     /**
@@ -88,14 +95,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Autor:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(SearchedTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+        jPanel1.add(SearchedTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 100, -1));
 
         SearchedAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchedAuthorActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchedAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        jPanel1.add(SearchedAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 100, -1));
 
         SearchedKeyword.setText("Palabra Clave:");
         jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
@@ -105,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SearchedWordActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
+        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 90, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -131,7 +138,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             // Call uploadFile method from Functions class
             try {
-                functions.uploadFile(selectedFile.getAbsolutePath());
+                app.uploadFile(selectedFile.getAbsolutePath());
                 JOptionPane.showMessageDialog(this,
                         "Archivo Cargado Exitosamente!: " + selectedFile.getAbsolutePath(),
                         "Archivo Cargado Exitosamente", JOptionPane.INFORMATION_MESSAGE);
@@ -190,7 +197,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(new Functions()).setVisible(true);
             }
         });
 }

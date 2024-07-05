@@ -76,6 +76,7 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
         if (entryList.isEmpty()) {
             return null;
         }
+        // For each entry in the entryList
         for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead();
                 i != null;
                 i = (HashTableEntry<E>) i.getNext()) {
