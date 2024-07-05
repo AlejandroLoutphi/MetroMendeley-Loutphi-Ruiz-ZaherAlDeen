@@ -233,7 +233,11 @@ public class LinkedList<E> {
     }
 
     /**
-     * Puts the elements of the list (that can fit) into the passed-in array.
+     * Puts the elements of the list (that can fit) into the passed-in array. The
+     * reason this is a "putInArray" and not a "toArray" is because Java doesn't
+     * allow you to create new generic arrays: they have to be passed in as
+     * parameters that are not generic.
+     * 
      * @param o array to write
      */
     public void putInArray(E[] o) {
