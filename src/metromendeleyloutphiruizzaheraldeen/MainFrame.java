@@ -153,6 +153,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         String Palabra = SearchedWord.getText();
         
+        System.out.println(Palabra);
+        
     }//GEN-LAST:event_SearchHashActionPerformed
 
     private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedWordActionPerformed
