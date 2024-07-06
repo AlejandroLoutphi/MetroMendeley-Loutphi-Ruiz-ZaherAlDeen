@@ -156,4 +156,21 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
         entryList.addAtHead(new HashTableEntry<>(key, elt));
         return true;
     }
+
+    /**
+     * Returns an array with all the hash table's keys.
+     * 
+     * @return an array with all the hash table's keys
+     */
+    public String[] keySet() {
+        String[] o = new String[this.size()];
+        int counter = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j.getNext()) {
+                o[counter] = j.getKey();
+                counter++;
+            }
+        }
+        return o;
+    }
 }
