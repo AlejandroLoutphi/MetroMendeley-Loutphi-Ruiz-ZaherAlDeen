@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
         LoadAbstract.setText("Cargar Resumen");
         LoadAbstract.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +79,10 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
 
         InstructionsButton.setText("Instrucciones");
-        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         SearchHash.setText("Buscar");
         SearchHash.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
                 DisplayListButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -169,7 +169,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         System.out.println(Palabra);
         int count = 0;
-        LinkedList<Investigation> text = new LinkedList();
+        LinkedList<Investigation> text = new LinkedList<>();
         
         while (count < text.size()){
             System.out.println(text.get(count).getText());
@@ -225,7 +225,6 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        Functions functions = new Functions();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
