@@ -4,6 +4,7 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +17,10 @@ import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
 import datastructures.LinkedListNode;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 /**
  * Enum for holding the value of what the text parser functions are currently
@@ -401,15 +406,11 @@ public class Functions {
             writer.write(this.newText.toString());
         }
     }
-public String[] getAllTitles() {
-    String[] array=new String[tableByTitle.size]
+      public Investigation[] getSortedInvestigationTitles() {
+    int totalEntries = tableByTitle.size();
+    Investigation[] titles = new Investigation[totalEntries];
+    tableByTitle.putEltsInArray(titles);
+    System.out.println("Total entries: " + totalEntries);
+    return titles;
 }
-        for (int i = 0; i < this.tableByTitle.size; i++) {
-                            for (<HashTableEntry><LinkedList<Investigation>> j = (<HashTableEntry><Investigation>) tableByTitle
-                                    .get(i).getHead(); j != null; j = (<HashTableEntry>Investigation>) j
-                                            .getNext()) {
-                                            array[counter]=j.getKey();
-                                            counter++;
-        }
-                                            return array
-                                
+}

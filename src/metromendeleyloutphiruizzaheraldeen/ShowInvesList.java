@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package metromendeleyloutphiruizzaheraldeen;
-
+import javax.swing.DefaultListModel;
 /**
  *
  * @author ayahzaheraldeen
@@ -15,8 +15,34 @@ public class ShowInvesList extends javax.swing.JFrame {
      */
     public ShowInvesList() {
         initComponents();
+        populateInvestigationList();
+    
+    
     }
-
+    
+    private void populateInvestigationList() {
+     Functions functions = new Functions();
+    Investigation[] titles = functions.getSortedInvestigationTitles();
+    
+    // Create a DefaultListModel to store Investigation titles
+    DefaultListModel<String> model = new DefaultListModel<>();
+    
+    // Add Investigation titles to the model
+    for (Investigation investigation : titles) {
+        if (investigation != null && investigation.getTitle() != null) {
+            model.addElement(investigation.getTitle());
+            System.out.println("populated");
+        } else {
+            System.out.println("Investigation or title is null");
+        }
+        System.out.println("Number of titles: " + titles.length);
+    }
+    
+    // Set the model to the JList
+    jList1.setModel(model);
+    jList1.revalidate();
+    jList1.repaint();
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +67,7 @@ public class ShowInvesList extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 400, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,6 +86,8 @@ public class ShowInvesList extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -85,6 +113,7 @@ public class ShowInvesList extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ShowInvesList().setVisible(true);
