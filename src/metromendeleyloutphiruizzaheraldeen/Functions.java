@@ -402,23 +402,14 @@ public class Functions {
         }
     }
 public String[] getAllTitles() {
-    String[] titles = new String[tableByTitle.size()];
-    int counter = 0;
-
-    // Iterate through the hashtable entries
-    for (int i = 0; i < tableByTitle.size(); i++) {
-        <HashTableEntry><Investigation>> entry = tableByTitle.get(i).getHead();
-        while (entry != null) {
-            LinkedListNode<Investigation> node = entry.getElt().getHead();
-            while (node != null) {
-                titles[counter] = node.getKey().getTitle();
-                counter++;
-                node = node.getNext();
-            }
-            entry = entry.getNext();
-        }
-    }
-
-    return titles;
+    String[] array=new String[tableByTitle.size]
 }
-      
+        for (int i = 0; i < this.tableByTitle.size; i++) {
+                            for (<HashTableEntry><LinkedList<Investigation>> j = (<HashTableEntry><Investigation>) tableByTitle
+                                    .get(i).getHead(); j != null; j = (<HashTableEntry>Investigation>) j
+                                            .getNext()) {
+                                            array[counter]=j.getKey();
+                                            counter++;
+        }
+                                            return array
+                                

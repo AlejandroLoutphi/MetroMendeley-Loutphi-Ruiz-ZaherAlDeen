@@ -60,30 +60,46 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 230, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Academy Engraved LET", 1, 24)); // NOI18N
         jLabel1.setText("Metro Mendeley");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
+        AddAbstract.setBackground(new java.awt.Color(179, 199, 247));
+        AddAbstract.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
         AddAbstract.setText("Agregar Resumen");
         AddAbstract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
+        LoadAbstract.setBackground(new java.awt.Color(179, 199, 247));
+        LoadAbstract.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
         LoadAbstract.setText("Cargar Resumen");
         LoadAbstract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        InstructionsButton.setBackground(new java.awt.Color(250, 175, 144));
+        InstructionsButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
+        InstructionsButton.setForeground(new java.awt.Color(51, 0, 51));
         InstructionsButton.setText("Instrucciones");
-        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        InstructionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InstructionsButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
+        SearchHash.setBackground(new java.awt.Color(139, 171, 241));
+        SearchHash.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 14)); // NOI18N
         SearchHash.setText("Buscar");
         SearchHash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,34 +108,40 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 14)); // NOI18N
         jLabel2.setText("Buscar Investigacion Por:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
+        SearchedKeyword.setFont(new java.awt.Font("ITF Devanagari", 1, 14)); // NOI18N
         SearchedKeyword.setText("Nombre del contenido");
-        jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 140, 20));
 
+        SearchedWord.setBackground(new java.awt.Color(139, 171, 241));
         SearchedWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchedWordActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 90, -1));
+        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 90, -1));
 
+        jComboBox2.setBackground(new java.awt.Color(139, 171, 241));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Prueba));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
+        DisplayListButton.setBackground(new java.awt.Color(250, 175, 144));
+        DisplayListButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
         DisplayListButton.setText("Mostrar Investigaciones");
         DisplayListButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplayListButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -198,6 +220,10 @@ public class MainFrame extends javax.swing.JFrame {
     addDirectAbstract.setVisible(true);
 
     }//GEN-LAST:event_AddAbstractActionPerformed
+
+    private void InstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructionsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InstructionsButtonActionPerformed
 
     /**
      * @param args the command line arguments
