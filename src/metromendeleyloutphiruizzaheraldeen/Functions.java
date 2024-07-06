@@ -414,4 +414,24 @@ public class Functions {
     System.out.println("Total entries: " + totalEntries);
     return titles;
 }
+      public boolean isHashTablePopulated() {
+    // Check if tableByTitle is initialized and not null
+    if (tableByTitle == null) {
+        System.out.println("tableByTitle is not initialized!");
+        return false;
+    }
+    
+    // Check if tableByTitle has entries
+    int size = tableByTitle.size();
+    if (size == 0) {
+        System.out.println("tableByTitle is empty!");
+        return false;
+    }
+    
+    // Optionally, you can print or log the content of the hash table
+    System.out.println("tableByTitle size: " + size);
+    // You may print or log more details about the entries if needed
+    
+    return true;
+}
 }
