@@ -64,6 +64,21 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
     }
 
     /**
+     * Returns the amount of elements housed inside the hash table.
+     *
+     * @return the amount of elements housed inside the hash table
+     */
+    public int size() {
+        int o = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (LinkedListNode<E> j = this.get(i).getHead(); j != null; j = j.getNext()) {
+                o++;
+            }
+        }
+        return o;
+    }
+
+    /**
      * Returns the element of the input list with the passed-in key or null if there
      * were no matches.
      * 
