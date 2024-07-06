@@ -114,6 +114,24 @@ public class Investigation {
     public void setKeywords(String[] keywords) {
         this.keywords = keywords;
     }
+    
+    public String GetArticleString() {
+        String title = this.title;
+        String[] authors = this.authors;
+        
+        String abstractBody = this.text;
+        String[] keywords = this.keywords;
+        System.out.println("El articulo en cuestion"); //Se puede borrar este print
+        String retornar = 
+                "Titulo: "+ title +"\n" 
+                + "Autores: "+ String.join(" , ", authors) +"\n" 
+                + "Contenido: "+ abstractBody +"\n" 
+                + "Palabras Claves: "+ String.join(" , ", keywords) +"\n" 
+                ;
+
+        return retornar;
+    }
+
 
     /**
      * Returns the amount of times the passed-in word appears in the investigation

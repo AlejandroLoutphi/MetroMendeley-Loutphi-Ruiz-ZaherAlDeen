@@ -4,6 +4,7 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
+import datastructures.HashTableEntry;
 import datastructures.LinkedList;
 import javax.swing.JFileChooser;
 
@@ -153,13 +154,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         String Palabra = SearchedWord.getText();
         
-        System.out.println(Palabra);
-        int count = 0;
-        LinkedList<Investigation> text = new LinkedList();
+        System.out.println(Palabra + "Probando");
+        app.ArticulosPorAutorYKeyword(Palabra);
+//       app.ArticulosPorTitle(Palabra);
         
-        while (count < text.size()){
-            System.out.println(text.get(count).getText());
-        }
+   
         
         
     }//GEN-LAST:event_SearchHashActionPerformed

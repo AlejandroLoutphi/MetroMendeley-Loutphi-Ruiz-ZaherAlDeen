@@ -165,6 +165,7 @@ public class Functions {
             throw new IOException();
         }
     }
+    
 
     /**
      * Returns a String with an analysis of the passed-in Investigation using the
@@ -308,6 +309,55 @@ public class Functions {
             throw new IOException();
         }
     }
+    
+    public  void ArticulosPorAutorYKeyword(String autor){ //Esto será utilizado para el serch UI de keywords y autores
+    for (int i = 0; i < this.tableByKeyword.length(); i++) {
+        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
+            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+            .getNext()) {
+                LinkedList<Investigation> key = j.getElt();
+                                
+                if(j.getKey().contains(autor)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    LinkedListNode<Investigation> variable = key.getHead();
+                                
+                        while (variable != null){ //Recorre la lista
+                            System.out.println( variable.getElt().GetArticleString()
+                                                    );
+                            variable = variable.getNext();
+                                }
+                                }
+                                
+                            }
+                            
+                        }
+}
+    
+    public  void ArticulosPorTitle(String Titulo){ //Esto será utilizado para el serch UI de keywords y autores
+    for (int i = 0; i < this.tableByTitle.length(); i++) {
+        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
+            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+            .getNext()) {
+                String key = j.getElt().getTitle();;
+                                
+                if(j.getKey().contains(Titulo)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    
+                            String str = String.join(" , ", j.getElt().getAuthors());    
+                        
+                            System.out.println(j.getElt().GetArticleString()
+                                                    );
+                            
+                                
+                                }
+                                
+                            }
+                            
+                        }
+}
+
+
+    
 
     public boolean parseAndBuildHashTables(String formattedInfo) {
         try {

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Alejandro Loutphi
  */
 public class MetroMendeleyLoutphiRuizZaherAlDeen {
-
+            Functions app = new Functions();
     /**
      * Main function for MetroMendeleyLoutphiRuizZaherAlDeen project.
      *
@@ -26,6 +26,7 @@ public class MetroMendeleyLoutphiRuizZaherAlDeen {
         try {
             app.buildHashTables();
             MainFrame mainFrame = new MainFrame(app);
+            
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: archivo de input \"" + Functions.INPUT_FILE_NAME + "\" no existe", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException e) {
