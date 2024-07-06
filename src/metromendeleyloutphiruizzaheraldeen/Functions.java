@@ -310,8 +310,9 @@ public class Functions {
         }
     }
     
-    public  void ArticulosPorAutorYKeyword(String autor){ //Esto será utilizado para el serch UI de keywords y autores
-    for (int i = 0; i < this.tableByKeyword.length(); i++) {
+    public  String ArticulosPorAutor(String autor){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+    for (int i = 0; i < this.tableByAuthor.length(); i++) {
         for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
             .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
             .getNext()) {
@@ -324,6 +325,7 @@ public class Functions {
                         while (variable != null){ //Recorre la lista
                             System.out.println( variable.getElt().GetArticleString()
                                                     );
+                            documento += variable.getElt().GetArticleString()+ "\n";
                             variable = variable.getNext();
                                 }
                                 }
@@ -331,9 +333,39 @@ public class Functions {
                             }
                             
                         }
+    return documento;
 }
     
-    public  void ArticulosPorTitle(String Titulo){ //Esto será utilizado para el serch UI de keywords y autores
+    public  String ArticulosPorKeyword(String autor){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+    for (int i = 0; i < this.tableByKeyword.length(); i++) {
+        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
+            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+            .getNext()) {
+                LinkedList<Investigation> key = j.getElt();
+                                
+                if(j.getKey().contains(autor)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    LinkedListNode<Investigation> variable = key.getHead();
+                                
+                        while (variable != null){ //Recorre la lista
+                            documento += variable.getElt().GetArticleString()+ "\n";
+                            System.out.println( variable.getElt().GetArticleString()
+                                                    );
+                            
+                            variable = variable.getNext();
+                                }
+                                }
+                                
+                            }
+                            
+                        }
+    return documento;
+}
+    
+    public  String ArticulosPorTitle(String Titulo){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+
     for (int i = 0; i < this.tableByTitle.length(); i++) {
         for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
             .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
@@ -344,7 +376,7 @@ public class Functions {
                     System.out.println(j.getKey());
                     
                             String str = String.join(" , ", j.getElt().getAuthors());    
-                        
+                            documento += j.getElt().GetArticleString()+ "\n";
                             System.out.println(j.getElt().GetArticleString()
                                                     );
                             
@@ -354,6 +386,7 @@ public class Functions {
                             }
                             
                         }
+    return documento;
 }
 
 

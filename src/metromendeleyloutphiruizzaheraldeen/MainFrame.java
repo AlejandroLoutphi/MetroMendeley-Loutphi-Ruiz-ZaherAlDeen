@@ -54,6 +54,8 @@ public class MainFrame extends javax.swing.JFrame {
         SearchedKeyword = new javax.swing.JLabel();
         SearchedWord = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jTextField2.setText("jTextField2");
 
@@ -85,7 +87,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SearchHashActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+        jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         jLabel2.setText("Buscar Por:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
@@ -108,7 +110,13 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 340, 190));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,9 +161,21 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String Palabra = SearchedWord.getText();
-        
+        String Mostrar = "";
         System.out.println(Palabra + "Probando");
-        app.ArticulosPorAutorYKeyword(Palabra);
+        if((String) jComboBox2.getSelectedItem() == "Titulo"){
+        Mostrar =     app.ArticulosPorTitle(Palabra);
+        }
+        else if((String) jComboBox2.getSelectedItem() == "Autor"){
+        Mostrar = app.ArticulosPorAutor(Palabra);
+        }
+        else{
+        Mostrar = app.ArticulosPorKeyword(Palabra);
+        //poner acá el código de Articulos por Palabras claves)
+    }
+        jTextArea1.setText(Mostrar);
+
+       // app.ArticulosPorAutor(Palabra);
 //       app.ArticulosPorTitle(Palabra);
         
    
@@ -218,6 +238,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
