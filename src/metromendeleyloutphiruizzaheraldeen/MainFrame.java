@@ -4,6 +4,7 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
+import datastructures.LinkedList;
 import javax.swing.JFileChooser;
 
 import java.io.File;
@@ -15,7 +16,8 @@ import javax.swing.*;
  * @author ayahzaheraldeen
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    LinkedList<String>  ObjetosMostrar = new LinkedList<String>(); 
+    String[] Prueba = (new String[] { "Titulo", "Autor", "Palabras Clave" });
     private Functions app;
 
     /**
@@ -48,12 +50,10 @@ public class MainFrame extends javax.swing.JFrame {
         InstructionsButton = new javax.swing.JButton();
         SearchHash = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        SearchedTitle = new javax.swing.JTextField();
-        SearchedAuthor = new javax.swing.JTextField();
         SearchedKeyword = new javax.swing.JLabel();
         SearchedWord = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        DisplayListButton = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
         LoadAbstract.setText("Cargar Resumen");
         LoadAbstract.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +79,10 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
 
         InstructionsButton.setText("Instrucciones");
-        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
+        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         SearchHash.setText("Buscar");
         SearchHash.addActionListener(new java.awt.event.ActionListener() {
@@ -90,26 +90,12 @@ public class MainFrame extends javax.swing.JFrame {
                 SearchHashActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+        jPanel1.add(SearchHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
-        jLabel2.setText("Buscar Por:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jLabel2.setText("Buscar Investigacion Por:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        jLabel3.setText("Titulo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-
-        jLabel4.setText("Autor:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(SearchedTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 100, -1));
-
-        SearchedAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchedAuthorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(SearchedAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 100, -1));
-
-        SearchedKeyword.setText("Palabra Clave:");
+        SearchedKeyword.setText("Nombre del contenido");
         jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         SearchedWord.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +103,23 @@ public class MainFrame extends javax.swing.JFrame {
                 SearchedWordActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 90, -1));
+        jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 90, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Prueba));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        DisplayListButton.setText("Mostrar Investigaciones");
+        DisplayListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisplayListButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -162,16 +164,34 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void SearchHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHashActionPerformed
         // TODO add your handling code here:
+        
+        String Palabra = SearchedWord.getText();
+        
+        System.out.println(Palabra);
+        int count = 0;
+        LinkedList<Investigation> text = new LinkedList<>();
+        
+        while (count < text.size()){
+            System.out.println(text.get(count).getText());
+        }
+        
+        
     }//GEN-LAST:event_SearchHashActionPerformed
-
-    private void SearchedAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedAuthorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SearchedAuthorActionPerformed
 
     private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchedWordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchedWordActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayListButtonActionPerformed
+        // TODO add your handling code here:
+        ShowInvesList displayFrame = new ShowInvesList();
+        displayFrame.setVisible(true);
+
+    }//GEN-LAST:event_DisplayListButtonActionPerformed
     private void AddAbstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAbstractActionPerformed
         // TODO add your handling code here:
         AddDirectAbstract addDirectAbstract = new AddDirectAbstract();
@@ -205,7 +225,6 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        Functions functions = new Functions();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -217,17 +236,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAbstract;
+    private javax.swing.JButton DisplayListButton;
     private javax.swing.JButton InstructionsButton;
     private javax.swing.JButton LoadAbstract;
     private javax.swing.JButton SearchHash;
-    private javax.swing.JTextField SearchedAuthor;
     private javax.swing.JLabel SearchedKeyword;
-    private javax.swing.JTextField SearchedTitle;
     private javax.swing.JTextField SearchedWord;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

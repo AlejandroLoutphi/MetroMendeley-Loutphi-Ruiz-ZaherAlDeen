@@ -15,6 +15,8 @@ public class Investigation {
     private String[] authors;
     private String text;
     private String[] keywords;
+     private String Hola;
+
 
     /**
      * Constructs an Abstract with all attributes set to null.
@@ -23,7 +25,7 @@ public class Investigation {
         this.title = null;
         this.authors = null;
         this.text = null;
-        this.keywords = null;
+        this.keywords = null; //Hola
     }
 
     /**
