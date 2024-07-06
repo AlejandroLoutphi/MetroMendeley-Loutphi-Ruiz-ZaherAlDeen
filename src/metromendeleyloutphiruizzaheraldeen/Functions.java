@@ -401,4 +401,24 @@ public class Functions {
             writer.write(this.newText.toString());
         }
     }
+public String[] getAllTitles() {
+    String[] titles = new String[tableByTitle.size()];
+    int counter = 0;
+
+    // Iterate through the hashtable entries
+    for (int i = 0; i < tableByTitle.size(); i++) {
+        <HashTableEntry><Investigation>> entry = tableByTitle.get(i).getHead();
+        while (entry != null) {
+            LinkedListNode<Investigation> node = entry.getElt().getHead();
+            while (node != null) {
+                titles[counter] = node.getKey().getTitle();
+                counter++;
+                node = node.getNext();
+            }
+            entry = entry.getNext();
+        }
+    }
+
+    return titles;
 }
+      
