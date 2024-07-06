@@ -117,7 +117,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
                 TitleFetchedActionPerformed(evt);
             }
         });
-        jPanel1.add(TitleFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        jPanel1.add(TitleFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 120, -1));
 
         jLabel1.setText("Titulo:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
@@ -134,8 +134,8 @@ public class AddDirectAbstract extends javax.swing.JFrame {
 
         jLabel3.setText("Autores:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-        jPanel1.add(AuthorsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
-        jPanel1.add(KeywordsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, 20));
+        jPanel1.add(AuthorsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 120, -1));
+        jPanel1.add(KeywordsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 100, 20));
 
         jLabel4.setText("Palabras Claves:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
