@@ -13,7 +13,7 @@ package datastructures;
  * @param <E> type of elements to store
  */
 public class HashTable<E> extends GenericArray<LinkedList<E>> {
-  
+
     /**
      * Constructs hash table with passed-in length.
      *
@@ -92,9 +92,8 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
             return null;
         }
         // For each entry in the entryList
-        for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead();
-                i != null;
-                i = (HashTableEntry<E>) i.getNext()) {
+        for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead(); i != null; i = (HashTableEntry<E>) i
+                .getNext()) {
             if (i.getKey().equals(key))
                 return i.getElt();
         }
@@ -166,11 +165,34 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
         String[] o = new String[this.size()];
         int counter = 0;
         for (int i = 0; i < this.length(); i++) {
-            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j.getNext()) {
+            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j
+                    .getNext()) {
                 o[counter] = j.getKey();
                 counter++;
             }
         }
         return o;
+    }
+
+    /**
+     * Puts the elements of the hash table (that can fit) into the passed-in array.
+     * The reason this is a "putEltsInArray" and not a "getEltsArray" is because
+     * Java doesn't allow you to create new generic arrays: they have to be passed
+     * in as parameters that are not generic.
+     * 
+     * @param o array to write
+     */
+    public void putEltsInArray(E[] o) {
+        int counter = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j
+                    .getNext()) {
+                if (counter >= o.length) {
+                    return;
+                }
+                o[counter] = j.getElt();
+                counter++;
+            }
+        }
     }
 }
