@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,92,0,0,1,-34"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="false"/>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ac" green="c2" red="f9" type="rgb"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="0" y="0" width="480" height="350"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Gujarati MT" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Instrucciones:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="170" y="10" width="150" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="ITF Devanagari" size="15" style="3"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Lea atentamente las instrucciones antes de utilizar la aplicaci&#xf3;n."/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="30" y="30" width="-1" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Hiragino Mincho ProN" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#xa1;BIENVENIDO A NUESTRA APLICACI&#xd3;N DE AN&#xc1;LISIS INTEGRAL DE INVESTIGACI&#xd3;N!"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="310" width="530" height="50"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="60" width="460" height="250"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jTextArea1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="db" green="e6" red="ff" type="rgb"/>
+                </Property>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="ITF Devanagari" size="13" style="0"/>
+                </Property>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="1. Debe haber descargado previamente el archivo principal &#xa;&quot;Instructions.txt&quot; en su sistema. De lo contrario, la aplicaci&#xf3;n no &#xa;se ejecutar&#xe1;.&#xa;2. Una vez que hayas descargado el archivo, puedes visualizar todas &#xa;las investigaciones guardadas pulsando el bot&#xf3;n &#xa;&quot;Mostrar Investigaciones&quot;&#xa;3. Aparecer&#xe1; un listado de todas las investigaciones, y &#xa;podr&#xe1;s seleccionar una de ellas para ver sus detalles.&#xa;4. Una vez que hayas seleccionado una investigaci&#xf3;n, &#xa;puedes pulsar el bot&#xf3;n &quot;Ver An&#xe1;lisis&quot; para ver las estad&#xed;sticas &#xa;de cada investigaci&#xf3;n, incluyendo el n&#xfa;mero de &#xa;palabras clave que se utilizan en su texto de resumen.&#xa;5. Tambi&#xe9;n puedes cerrar este panel utilizando el bot&#xf3;n &#xa;&quot;Cerrar&quot;.&#xa;6. Ahora, puedes a&#xf1;adir una nueva investigaci&#xf3;n&#xa; pulsando el bot&#xf3;n &#xa;&quot;Agregar Resumen&quot; para escribir directamente los detalles  &#xa;de la investigaci&#xf3;n incluyendo el t&#xed;tulo, lista de autores, &#xa;texto y lista de palabras clave.&#xa;NOTA:&#xa;-LOS AUTORES Y PALABRAS CLAVE DEBEN ESTAR&#xa; SEPARADOS POR COMAS.&#xa;-TODOS LOS CAMPOS DEBEN SER COMPLEMENTADOS &#xa;ANTES DE GUARDAR LA INVESTIGACI&#xd3;N&#xa;7. Alternativamente, puedes cargar un archivo de una&#xa; investigaci&#xf3;n directamente, y ser&#xe1; analizada utilizando e&#xa;l bot&#xf3;n &quot;Cargar Resumen&quot;.&#xa;NOTA: DEBE SER UN TEXTO.&#xa;8. Ahora puedes cerrar la aplicaci&#xf3;n, y recargar el programa &#xa;para analizar la nueva investigaci&#xf3;n.&#xa;9. Tambi&#xe9;n puedes utilizar la opci&#xf3;n desplegable para seleccionar&#xa; c&#xf3;mo te gustar&#xed;a buscar una investigaci&#xf3;n (Por Autores, T&#xed;tulos o &#xa;Palabras Clave) e ingresar el nombre en el campo de texto en &#xa;la aplicaci&#xf3;n principal. &#xa1;Presiona el bot&#xf3;n &quot;Buscar&quot; y&#xa; buscar&#xe1; en la lista de investigaciones el texto que est&#xe1;s buscando!"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

@@ -68,9 +68,12 @@ public class AddDirectAbstract extends javax.swing.JFrame {
 
         // Keywords
         formattedInfo.append("Palabras Claves: ").append(keywords.replace(",", ", ")).append("\n");
-
+        app.appendToNewText(formattedInfo.toString());
+        System.out.println(formattedInfo);
         return formattedInfo.toString();
     }
+    
+   
 
     private void displayFormattedInfo(String formattedInfo) {
         // Example: Display formatted information in a message dialog
@@ -173,6 +176,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         String formattedInfo = getFormattedInformation();
         // Example: Show a message dialog with the formatted information
         JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
+        
 
         // Example: Save the formatted information to a file (adjust this as per your
         // needs)

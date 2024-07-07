@@ -216,6 +216,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void InstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_InstructionsButtonActionPerformed
         // TODO add your handling code here:
+        if (evt.getSource() == InstructionsButton) {
+            InstructionsFrame instructionsFrame = new InstructionsFrame();
+            instructionsFrame.setVisible(true);
+    }
     }// GEN-LAST:event_InstructionsButtonActionPerformed
 
     /**

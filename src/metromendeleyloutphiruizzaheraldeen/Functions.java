@@ -382,7 +382,7 @@ public class Functions {
     }
 
     /**
-     * Appendds the newText string to the input file for future use when the app is
+     * Appends the newText string to the input file for future use when the app is
      * launched again.
      * 
      * @throws IOException if the file couldn't be written
@@ -439,5 +439,9 @@ public class Functions {
         Investigation[] o = new Investigation[list.size()];
         list.putInArray(o);
         return o;
+    }
+    public void appendToNewText(String formattedInfo) {
+        // Append formattedInfo to newText
+        newText.append(formattedInfo);
     }
 }
