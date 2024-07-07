@@ -9,6 +9,10 @@ import javax.swing.JFileChooser;
 
 import java.io.File;
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+
 
 /**
  *
@@ -18,6 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
     LinkedList<String> ObjetosMostrar = new LinkedList<String>();
     String[] Prueba = (new String[] { "Autor", "Palabras Clave" });
     private Functions app;
+    
 
     /**
      * Creates new form MainFrame
@@ -29,7 +34,26 @@ public class MainFrame extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.app = app;
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                saveDataOnClose();
+               
+            }
+        });
+    
     }
+    private void saveDataOnClose() {
+    if (app.isStringNotEmpty()) { // Check if newText is not empty
+        try {
+            app.appendNewTextToFile(); // Save newText to file
+            JOptionPane.showMessageDialog(this, "Text saved to file on close.");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saving text to file: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,7 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
 
         LoadAbstract.setBackground(new java.awt.Color(179, 199, 247));
         LoadAbstract.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
@@ -85,7 +109,7 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         InstructionsButton.setBackground(new java.awt.Color(250, 175, 144));
         InstructionsButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
@@ -141,40 +165,72 @@ public class MainFrame extends javax.swing.JFrame {
                 DisplayListButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void LoadAbstractActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_LoadAbstractActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
+     
+    // Define the correct password
+    String correctPassword = "EDD2024"; 
+    boolean passwordEnteredCorrectly = false;
 
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
+  
+    while (!passwordEnteredCorrectly) {
+        // Prompt user for password
+        String password = JOptionPane.showInputDialog(this, "Enter Clave para cargar archivo:");
 
-            // Check if the file has .txt extension
-            if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
-                JOptionPane.showMessageDialog(this,
-                        "Error: archivo debe ser del formato .txt",
-                        "Error Cargando Archivo", JOptionPane.ERROR_MESSAGE);
-                return; // Exit method if format is incorrect
-            }
-
-            // Call uploadFile method from Functions class
-            try {
-                app.uploadFile(selectedFile.getAbsolutePath());
-                JOptionPane.showMessageDialog(this,
-                        "Archivo Cargado Exitosamente!: " + selectedFile.getAbsolutePath(),
-                        "Archivo Cargado Exitosamente", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this,
-                        "Error: " + ex.getMessage(),
-                        "Error Cargando archivo", JOptionPane.ERROR_MESSAGE);
+        // Check if password is correct
+        if (password == null) {
+            // User canceled the input dialog
+            JOptionPane.showMessageDialog(this, "Clave Cancelado. Archivo no Cargado.");
+            return; // Exit method if canceled
+        } else if (password.equals(correctPassword)) {
+            // Password is correct, proceed to load file
+            loadSelectedFile();
+            passwordEnteredCorrectly = true; // Set flag to exit loop
+        } else {
+            // Password is incorrect, prompt user to retry
+            int option = JOptionPane.showConfirmDialog(this, "Clave Incorrecto. Intentar Otra ves?", "Clave Incorrecto", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.NO_OPTION) {
+                return; // Exit method if user chooses not to retry
             }
         }
+    }
+}
+
+// Method to handle file loading
+private void loadSelectedFile() {
+    JFileChooser fileChooser = new JFileChooser();
+    int returnValue = fileChooser.showOpenDialog(null);
+
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+
+        // Check if the file has .txt extension
+        if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: archivo debe ser del formato .txt",
+                    "Error Cargando Archivo", JOptionPane.ERROR_MESSAGE);
+            return; // Exit method if format is incorrect
+        }
+
+        // Call uploadFile method from Functions class
+        try {
+            app.uploadFile(selectedFile.getAbsolutePath());
+            JOptionPane.showMessageDialog(this,
+                    "Archivo Cargado Exitosamente!: " + selectedFile.getAbsolutePath(),
+                    "Archivo Cargado Exitosamente", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: " + ex.getMessage(),
+                    "Error Cargando archivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     }// GEN-LAST:event_LoadAbstractActionPerformed
 
     private void SearchHashActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchHashActionPerformed
@@ -209,9 +265,37 @@ public class MainFrame extends javax.swing.JFrame {
 
     }// GEN-LAST:event_DisplayListButtonActionPerformed
 
-    private void AddAbstractActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddAbstractActionPerformed
-        AddDirectAbstract addDirectAbstract = new AddDirectAbstract(this.app);
+   private void AddAbstractActionPerformed(java.awt.event.ActionEvent evt) {
+    // Define the correct password
+    String correctPassword = "EDD2024"; // Replace with your actual password
+    boolean passwordEnteredCorrectly = false;
 
+    // Loop to prompt user for password until correct password is entered or canceled
+    while (!passwordEnteredCorrectly) {
+        // Prompt user for password
+        String password = JOptionPane.showInputDialog(this, "Enter Clave:");
+
+        // Check if password is correct
+        if (password == null) {
+            // User canceled the input dialog
+            JOptionPane.showMessageDialog(this, "Input de Clave Cancelado. Investigacion no Añadido.");
+            break; // Exit loop if canceled
+        } else if (password.equals(correctPassword)) {
+            // Password is correct, proceed to add investigation
+            AddDirectAbstract addDirectAbstract = new AddDirectAbstract(this.app);
+            // AddDirectAbstract is an example, replace with your actual code to add investigation
+
+            // Optionally, display a message or perform additional actions
+            JOptionPane.showMessageDialog(this, "Clave Correcto!. Agregando Investigacion!");
+            passwordEnteredCorrectly = true; // Set flag to exit loop
+        } else {
+            // Password is incorrect, prompt user to retry
+            int option = JOptionPane.showConfirmDialog(this, "Clave Incorrecto. Intentar Otra ves?", "Clave Incorrecto", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.NO_OPTION) {
+                break; // Exit loop if user chooses not to retry
+            }
+        }
+    }
     }// GEN-LAST:event_AddAbstractActionPerformed
 
     private void InstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_InstructionsButtonActionPerformed

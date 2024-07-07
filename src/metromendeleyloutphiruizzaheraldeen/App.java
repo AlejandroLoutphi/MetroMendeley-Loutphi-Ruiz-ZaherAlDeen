@@ -31,6 +31,7 @@ public class App {
     private HashTable<LinkedList<Investigation>> tableByAuthor;
 
     public static final String INPUT_FILE_NAME = "Investigations.txt";
+    public static final String OUTPUT_FILE_NAME = "Investigations.txt";
 
     public App() {
         this.newText = new StringBuilder();
@@ -387,15 +388,22 @@ public class App {
      * 
      * @throws IOException if the file couldn't be written
      */
-    public void appendNewTextToFile() throws IOException {
-        File fileToWrite = new File(INPUT_FILE_NAME);
+     public void appendNewTextToFile() throws IOException {
+        File fileToWrite = new File(OUTPUT_FILE_NAME);
+
+        // Create the file if it doesn't exist
         if (!fileToWrite.exists()) {
-            throw new FileNotFoundException();
+            fileToWrite.createNewFile();
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite))) {
-            writer.write(this.newText.toString());
+
+        // Append newText to the file using FileWriter with append mode
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite, true))) {
+            writer.append(newText.toString());
+            writer.newLine(); // Optionally, add a new line after each append
         }
     }
+    
+    
 
     /**
      * Returns an array with all investigations sorted by their title.

@@ -31,6 +31,7 @@ public class Functions {
     private HashTable<LinkedList<Investigation>> tableByAuthor;
 
     public static final String INPUT_FILE_NAME = "Investigations.txt";
+     public static final String OUTPUT_FILE_NAME = "Investigations.txt";
 
     public Functions() {
         this.newText = new StringBuilder();
@@ -388,12 +389,23 @@ public class Functions {
      * @throws IOException if the file couldn't be written
      */
     public void appendNewTextToFile() throws IOException {
-        File fileToWrite = new File(INPUT_FILE_NAME);
+         
+        File fileToWrite = new File(OUTPUT_FILE_NAME);
+
+        // Create the file if it doesn't exist
         if (!fileToWrite.exists()) {
-            throw new FileNotFoundException();
+            boolean created = fileToWrite.createNewFile();
+            if (!created) {
+                throw new IOException("Failed to create file: " + OUTPUT_FILE_NAME);
+            }
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite))) {
-            writer.write(this.newText.toString());
+
+        // Append newText to the file using FileWriter with append mode
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite, true))) {
+            writer.append(newText.toString());
+            writer.newLine(); // Optionally, add a new line after each append
+            writer.flush(); // Ensure data is written to the file
+            System.out.println("Successfully appended to file: " + OUTPUT_FILE_NAME);
         }
     }
 
@@ -440,8 +452,20 @@ public class Functions {
         list.putInArray(o);
         return o;
     }
+    /**
+     * Appends the new investigation details into a string variable newText
+     * @param formattedInfo new entered investigation details/information
+     */
     public void appendToNewText(String formattedInfo) {
         // Append formattedInfo to newText
         newText.append(formattedInfo);
+        
+    }
+    /**Returns a boolean that checks if the newText string is empty or not
+     * 
+     * @return a boolean that checks if newText is filled
+     */
+    public boolean isStringNotEmpty() {
+        return newText != null && !newText.isEmpty();
     }
 }
