@@ -4,7 +4,6 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-import datastructures.LinkedList;
 import javax.swing.JFileChooser;
 
 import java.io.File;
@@ -20,14 +19,14 @@ import java.io.IOException;
 public class MainFrame extends javax.swing.JFrame {
 
     private String[] Prueba = (new String[] { "Autor", "Palabras Clave" });
-    private Functions app;
+    private App app;
 
     /**
      * Creates new form MainFrame
      *
      * @param app app object
      */
-    public MainFrame(Functions app) {
+    public MainFrame(App app) {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -189,7 +188,7 @@ public class MainFrame extends javax.swing.JFrame {
             System.exit(0);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
-                    "Error al guardar datos en archivo \"" + Functions.INPUT_FILE_NAME + "\"", "Error",
+                    "Error al guardar datos en archivo \"" + App.INPUT_FILE_NAME + "\"", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_CloseButtonActionPerformed
@@ -308,7 +307,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame(new Functions()).setVisible(true);
+                new MainFrame(new App()).setVisible(true);
             }
         });
     }

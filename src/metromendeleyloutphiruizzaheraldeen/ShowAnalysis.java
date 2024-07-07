@@ -13,7 +13,7 @@ public class ShowAnalysis extends javax.swing.JFrame {
     /**
      * Creates new form ShowInvesList
      */
-    public ShowAnalysis(Functions app, Investigation investigation) {
+    public ShowAnalysis(App app, Investigation investigation) {
         initComponents();
         this.setVisible(true);
         this.jTextArea1.setText(app.analysis(investigation));
@@ -116,7 +116,7 @@ public class ShowAnalysis extends javax.swing.JFrame {
         // </editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShowAnalysis(new Functions(), new Investigation()).setVisible(true);
+                new ShowAnalysis(new App(), new Investigation()).setVisible(true);
             }
         });
     }

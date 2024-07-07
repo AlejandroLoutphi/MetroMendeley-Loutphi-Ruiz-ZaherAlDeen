@@ -4,12 +4,7 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import datastructures.LinkedList;
-import datastructures.LinkedListNode;
-import datastructures.HashTable;
-import datastructures.HashTableEntry;
 
 /**
  *
@@ -17,12 +12,12 @@ import datastructures.HashTableEntry;
  */
 public class AddDirectAbstract extends javax.swing.JFrame {
 
-    private Functions app;
+    private App app;
 
     /**
      * Creates new form AddDirectAbstract
      */
-    public AddDirectAbstract(Functions app) {
+    public AddDirectAbstract(App app) {
         initComponents();
         this.app = app;
         this.setVisible(true);
@@ -212,7 +207,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDirectAbstract(new Functions()).setVisible(true);
+                new AddDirectAbstract(new App()).setVisible(true);
             }
         });
     }

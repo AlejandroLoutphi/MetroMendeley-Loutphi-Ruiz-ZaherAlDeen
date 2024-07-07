@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
-import datastructures.LinkedListNode;
 
 /**
  * App Class for holding the state and unique functions of the
@@ -25,7 +24,7 @@ import datastructures.LinkedListNode;
  * @author ayahzaheraldeen
  * @author Alejandro Loutphi
  */
-public class Functions {
+public class App {
 
     private StringBuilder newText;
     private HashTable<Investigation> tableByTitle;
@@ -35,7 +34,7 @@ public class Functions {
 
     public static final String INPUT_FILE_NAME = "Investigations.txt";
 
-    public Functions() {
+    public App() {
         this.newText = new StringBuilder();
         this.newText.append("\n");
         // TODO test hash table to be the correct size
