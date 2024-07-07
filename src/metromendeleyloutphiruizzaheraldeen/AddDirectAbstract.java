@@ -3,90 +3,97 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package metromendeleyloutphiruizzaheraldeen;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import datastructures.LinkedList;
 import datastructures.LinkedListNode;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
+
 /**
  *
  * @author ayahzaheraldeen
  */
 public class AddDirectAbstract extends javax.swing.JFrame {
 
+    private Functions app;
+
     /**
      * Creates new form AddDirectAbstract
      */
-    public AddDirectAbstract() {
+    public AddDirectAbstract(Functions app) {
         initComponents();
+        this.app = app;
+        this.setVisible(true);
         AddButton = new JButton("Agregar"); // Initialize Add button
         AddButton.addActionListener(e -> onAddButtonClicked()); // Add action listener
-        jPanel1.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1)); // Add button to panel
-    
-    
-    }
-  
+        jPanel1.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1)); // Add button to
+                                                                                                     // panel
 
+    }
 
     private boolean validateFields() {
         if (TitleFetched.getText().isEmpty() ||
-            TextFetched.getText().isEmpty() ||
-            AuthorsFetched.getText().isEmpty() ||
-            KeywordsFetched.getText().isEmpty()) {
+                TextFetched.getText().isEmpty() ||
+                AuthorsFetched.getText().isEmpty() ||
+                KeywordsFetched.getText().isEmpty()) {
             return false; // Return false if any field is empty
         }
-        
+
         return true; // All fields are filled
     }
+
     private String getFormattedInformation() {
-    String title = TitleFetched.getText().trim();
-    String authors = AuthorsFetched.getText().trim();
-    String text = TextFetched.getText().trim();
-    String keywords = KeywordsFetched.getText().trim();
-    
-    // Split authors by comma or newline to handle multiple authors
-    String[] authorsArray = authors.split("[,\n]");
-    StringBuilder formattedInfo = new StringBuilder();
-    
-    // Title
-    formattedInfo.append(title).append("\n\n");
-    
-    // Authors
-    formattedInfo.append("Autores").append("\n");
-    for (String author : authorsArray) {
-        formattedInfo.append(author.trim()).append("\n");
+        String title = TitleFetched.getText().trim();
+        String authors = AuthorsFetched.getText().trim();
+        String text = TextFetched.getText().trim();
+        String keywords = KeywordsFetched.getText().trim();
+
+        // Split authors by comma or newline to handle multiple authors
+        String[] authorsArray = authors.split("[,\n]");
+        StringBuilder formattedInfo = new StringBuilder();
+
+        // Title
+        formattedInfo.append(title).append("\n\n");
+
+        // Authors
+        formattedInfo.append("Autores").append("\n");
+        for (String author : authorsArray) {
+            formattedInfo.append(author.trim()).append("\n");
+        }
+
+        // Abstract Text
+        formattedInfo.append("Resumen ").append("\n").append(text).append("\n\n");
+
+        // Keywords
+        formattedInfo.append("Palabras Claves: ").append(keywords.replace(",", ", ")).append("\n");
+
+        return formattedInfo.toString();
     }
-    
-    
-    // Abstract Text
-    formattedInfo.append("Resumen ").append("\n").append(text).append("\n\n");
-    
-    // Keywords
-    formattedInfo.append("Palabras Claves: ").append(keywords.replace(",", ", ")).append("\n");
-    
-    return formattedInfo.toString();
-}
 
     private void displayFormattedInfo(String formattedInfo) {
         // Example: Display formatted information in a message dialog
         JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
         // You can also save this information to a file or database here
     }
+
     private void onAddButtonClicked() {
         if (validateFields()) {
             String formattedInfo = getFormattedInformation();
             displayFormattedInfo(formattedInfo); // Display or save formatted information
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void clearFields() {
-    TitleFetched.setText("");
-    AuthorsFetched.setText("");
-    TextFetched.setText("");
-    KeywordsFetched.setText("");
-}
+        TitleFetched.setText("");
+        AuthorsFetched.setText("");
+        TextFetched.setText("");
+        KeywordsFetched.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +101,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="GeneratedCode">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -151,51 +158,54 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        // TODO add your handling code here
-       String formattedInfo = getFormattedInformation();
-    
-    // Example: Print the formatted information to console
-    System.out.println("Formatted Information:");
-    System.out.println(formattedInfo);
-    
-    // Example: Show a message dialog with the formatted information
-    JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
-    
-    // Example: Save the formatted information to a file (adjust this as per your needs)
-    // saveFormattedInfoToFile(formattedInfo);
-    
-    // Optionally, clear the text fields after processing
-    clearFields();
-    }//GEN-LAST:event_AddButtonActionPerformed
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddButtonActionPerformed
+        String formattedInfo = getFormattedInformation();
 
-    private void TitleFetchedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleFetchedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TitleFetchedActionPerformed
+        // Example: Print the formatted information to console
+        System.out.println("Formatted Information:");
+        System.out.println(formattedInfo);
 
-    private void TextFetchedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFetchedActionPerformed
+        // Example: Show a message dialog with the formatted information
+        JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
+
+        // Example: Save the formatted information to a file (adjust this as per your
+        // needs)
+        // saveFormattedInfoToFile(formattedInfo);
+
+        // Optionally, clear the text fields after processing
+        clearFields();
+    }// GEN-LAST:event_AddButtonActionPerformed
+
+    private void TitleFetchedActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TitleFetchedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextFetchedActionPerformed
+    }// GEN-LAST:event_TitleFetchedActionPerformed
+
+    private void TextFetchedActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextFetchedActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_TextFetchedActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -205,21 +215,24 @@ public class AddDirectAbstract extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDirectAbstract.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
-        Functions functions = new Functions();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDirectAbstract().setVisible(true);
+                new AddDirectAbstract(new Functions()).setVisible(true);
             }
         });
     }

@@ -24,17 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
- * Enum for holding the value of what the text parser functions are currently
- * reading.
- */
-enum ReadingState {
-    TITLE,
-    AUTHORS,
-    TEXT,
-    KEYWORDS,
-}
-
-/**
  * App Class for holding the state and unique functions of the
  * {@link MetroMendeleyLoutphiRuizZaherAlDeen} project.
  *
@@ -93,7 +82,7 @@ public class Functions {
             String[] authorArray = new String[0];
             int authorLen = 0;
             String[] keywordArray;
-            ReadingState state = ReadingState.TITLE;
+            ReadingState readingState = ReadingState.TITLE;
             Investigation investigation = new Investigation();
 
             while ((line = reader.readLine()) != null) {
@@ -103,14 +92,14 @@ public class Functions {
                     continue;
                 }
 
-                switch (state) {
+                switch (readingState) {
                     case TITLE:
                         investigation = new Investigation();
                         authorList = new LinkedList<>();
                         authorLen = 0;
 
                         investigation.setTitle(line);
-                        state = ReadingState.AUTHORS;
+                        readingState = ReadingState.AUTHORS;
                         break;
 
                     case AUTHORS:
@@ -118,7 +107,7 @@ public class Functions {
                             continue;
                         }
                         if (line.startsWith("Resumen")) {
-                            state = ReadingState.TEXT;
+                            readingState = ReadingState.TEXT;
                             continue;
                         }
                         authorList.add(line);
@@ -131,7 +120,7 @@ public class Functions {
                         authorList.putInArray(authorArray);
                         investigation.setAuthors(authorArray);
                         investigation.setText(line);
-                        state = ReadingState.KEYWORDS;
+                        readingState = ReadingState.KEYWORDS;
                         break;
 
                     case KEYWORDS:
@@ -146,7 +135,7 @@ public class Functions {
                         for (int i = 0; i < keywordArray.length; i++) {
                             this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
                         }
-                        state = ReadingState.TITLE;
+                        readingState = ReadingState.TITLE;
 
                         // Add the investigation object to all the hash tables
                         this.tableByTitle.add(investigation.getTitle(), investigation);
@@ -167,8 +156,6 @@ public class Functions {
                         break;
                 }
             }
-        } catch (IOException e) {
-            throw new IOException();
         }
     }
     
@@ -216,6 +203,15 @@ public class Functions {
         return o.toString();
     }
 
+    /**
+     * Loads the file at the passed-in file path into the hash tables and into the
+     * newText buffer for saving.
+     *
+     * @param filePath path of file to load
+     * @throws FileNotFoundException     if file doesn't exist
+     * @throws IOException               if file couldn't be read
+     * @throws InvalidParameterException if file isn't of the valid format
+     */
     public void uploadFile(String filePath) throws FileNotFoundException, IOException, InvalidParameterException {
         File fileToUpload = new File(filePath);
         if (!fileToUpload.exists()) {
@@ -227,14 +223,23 @@ public class Functions {
         addFileToHashTables(fileToUpload);
     }
 
-    private void addFileToHashTables(File file) throws FileNotFoundException, IOException, InvalidParameterException {
+    /**
+     * Loads the passed-in file into the hash tables and into the newText buffer for
+     * saving.
+     *
+     * @param file file to load
+     * @throws FileNotFoundException     if file doesn't exist
+     * @throws IOException               if file couldn't be read
+     * @throws InvalidParameterException if file isn't of the valid format
+     */
+    private void addFileToHashTables(File file) throws IOException, InvalidParameterException {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             LinkedList<String> authorList = new LinkedList<>();
             String[] authorArray = new String[0];
             int authorLen = 0;
             String[] keywordArray;
-            ReadingState state = ReadingState.TITLE;
+            ReadingState readingState = ReadingState.TITLE;
             Investigation investigation = new Investigation();
             StringBuilder fileText = new StringBuilder();
 
@@ -246,14 +251,14 @@ public class Functions {
                     continue;
                 }
 
-                switch (state) {
+                switch (readingState) {
                     case TITLE:
                         investigation = new Investigation();
                         authorList = new LinkedList<>();
                         authorLen = 0;
 
                         investigation.setTitle(line);
-                        state = ReadingState.AUTHORS;
+                        readingState = ReadingState.AUTHORS;
                         break;
 
                     case AUTHORS:
@@ -261,7 +266,7 @@ public class Functions {
                             continue;
                         }
                         if (line.startsWith("Resumen")) {
-                            state = ReadingState.TEXT;
+                            readingState = ReadingState.TEXT;
                             continue;
                         }
                         authorList.add(line);
@@ -274,7 +279,7 @@ public class Functions {
                         authorList.putInArray(authorArray);
                         investigation.setAuthors(authorArray);
                         investigation.setText(line);
-                        state = ReadingState.KEYWORDS;
+                        readingState = ReadingState.KEYWORDS;
                         break;
 
                     case KEYWORDS:
@@ -311,8 +316,6 @@ public class Functions {
                 }
             }
             throw new InvalidParameterException();
-        } catch (IOException e) {
-            throw new IOException();
         }
     }
     //Aquí abajo se encuentra todo para traversar el archivo
@@ -423,95 +426,104 @@ public class Functions {
 }
     
 
-    public boolean parseAndBuildHashTables(String formattedInfo) {
-        try {
-            String[] lines = formattedInfo.split("\n"); // Split formattedInfo into lines
+    /**
+     * Loads the passed-in string into the hash tables and into the newText buffer
+     * for
+     * saving.
+     *
+     * @param info String containing the formatted info for an Investigation object
+     * @return false if the input investigation's name already exists. Otherwise,
+     *         true.
+     */
+    public boolean parseAndBuildHashTables(String info) {
+        String[] lines = info.split("\n");
 
-            String title = "";
-            LinkedList<String> authorsList = new LinkedList<>();
-            String[] keywords = new String[0];
-            StringBuilder abstractText = new StringBuilder();
-            String[] authorArray = new String[0];
-            int authorlen = 0;
-            int state = 0; // Track the state of parsing
+        String title = "";
+        LinkedList<String> authorsList = new LinkedList<>();
+        String[] keywords = new String[0];
+        StringBuilder abstractText = new StringBuilder();
+        String[] authorArray = new String[0];
+        int authorlen = 0;
+        ReadingState readingState = ReadingState.TITLE;
 
-            for (String line : lines) {
-                line = line.trim();
+        for (String line : lines) {
+            line = line.trim();
 
-                switch (state) {
-                    case 0:
-                        title = line; // First line is the title
-                        state = 1;
-                        break;
+            switch (readingState) {
+                case TITLE:
+                    title = line; // First line is the title
+                    readingState = ReadingState.AUTHORS;
+                    break;
 
-                    case 1:
-                        if (line.startsWith("Autores")) {
-                            state = 2;
-                            continue;
+                case AUTHORS:
+                    if (line.startsWith("Autores")) {
+                        continue;
+                    }
+                    if (line.startsWith("Resumen")) {
+                        readingState = ReadingState.TEXT;
+                        continue;
+                    }
+                    // Collect authors until "Resumen" is encountered
+                    authorsList.add(line);
+                    authorlen++;
+                    break;
+
+                case TEXT:
+                    authorArray = new String[authorlen];
+                    authorsList.add(line);
+                    readingState = ReadingState.KEYWORDS;
+                    break;
+
+                case KEYWORDS:
+                    if (line.startsWith("Palabras Claves")) {
+                        String keywordsLine = line.substring("Palabras Claves: ".length());
+                        // Delete initial wording and trailing period
+                        line = line.substring("Palabras Claves: ".length());
+                        if (line.charAt(line.length() - 1) == '.') {
+                            line = line.substring(0, line.length() - 1);
                         }
-                        // Collect authors until "Resumen" is encountered
-                        authorsList.add(line);
-                        authorlen++;
-
-                        break;
-
-                    case 2:
-                        authorArray = new String[authorlen];
-                        if (line.startsWith("Resumen")) {
-                            state = 3;
-                            continue;
-                        }
-                        // Handle continuation of authors list if needed
-                        authorsList.add(line);
-                        break;
-
-                    case 3:
-                        if (line.startsWith("Palabras Claves")) {
-                            String keywordsLine = line.substring("Palabras Claves: ".length());
-                            keywords = keywordsLine.split(", ");
-                            state = 0; // Reset state after processing keywords
-                        } else {
-                            abstractText.append(line).append("\n"); // Append to abstract text
-                        }
-                        break;
-
-                    default:
-                        // Handle invalid state
-                        System.err.println("Error: Invalid State at parse");
-                        return false;
-                }
+                        keywords = keywordsLine.split(", ");
+                    } else {
+                        abstractText.append(line).append("\n"); // Append to abstract text
+                    }
+                    break;
             }
-
-            // Create an Investigation object
-            Investigation investigation = new Investigation();
-            investigation.setTitle(title);
-            investigation.setAuthors(authorArray);
-            investigation.setText(abstractText.toString().trim());
-            investigation.setKeywords(keywords);
-
-            // Populate hash tables
-            this.tableByTitle.add(title, investigation);
-            String author;
-            // Iterate over linkedlist
-            for (LinkedListNode<String> i = authorsList.getHead(); i != null; i = i.getNext()) {
-                author = i.getElt();
-                this.tableByAuthor.lookUp(author).addAtHead(investigation);
-            }
-            for (String keyword : keywords) {
-                this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
-            }
-
-            return true;
-
-        } catch (Exception e) {
-            // Handle any exceptions
-            System.err.println("Error parsing formattedInfo: " + e.getMessage());
-            return false;
         }
+
+        // Create an Investigation object
+        Investigation investigation = new Investigation();
+        investigation.setTitle(title);
+        investigation.setAuthors(authorArray);
+        investigation.setText(abstractText.toString().trim());
+        investigation.setKeywords(keywords);
+
+        // Populate hash tables
+        boolean o = this.tableByTitle.add(title, investigation);
+        String author;
+        // Iterate over linkedlist
+        for (LinkedListNode<String> i = authorsList.getHead(); i != null; i = i.getNext()) {
+            author = i.getElt();
+            this.tableByAuthor.lookUp(author).addAtHead(investigation);
+        }
+        for (String keyword : keywords) {
+            this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
+        }
+
+        return o;
     }
 
+    /**
+     * Appendds the newText string to the input file for future use when the app is
+     * launched again.
+     * 
+     * @throws IOException if the file couldn't be written
+     */
     public void appendNewTextToFile() throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(INPUT_FILE_NAME, true))) {
+        File fileToWrite = new File(INPUT_FILE_NAME);
+        if (!fileToWrite.exists()) {
+            throw new FileNotFoundException();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite))) {
             writer.write(this.newText.toString());
         }
     }
