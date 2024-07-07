@@ -13,7 +13,7 @@ package datastructures;
  * @param <E> type of elements to store
  */
 public class HashTable<E> extends GenericArray<LinkedList<E>> {
-  
+
     /**
      * Constructs hash table with passed-in length.
      *
@@ -64,6 +64,21 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
     }
 
     /**
+     * Returns the amount of elements housed inside the hash table.
+     *
+     * @return the amount of elements housed inside the hash table
+     */
+    public int size() {
+        int o = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (LinkedListNode<E> j = this.get(i).getHead(); j != null; j = j.getNext()) {
+                o++;
+            }
+        }
+        return o;
+    }
+
+    /**
      * Returns the element of the input list with the passed-in key or null if there
      * were no matches.
      * 
@@ -77,9 +92,8 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
             return null;
         }
         // For each entry in the entryList
-        for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead();
-                i != null;
-                i = (HashTableEntry<E>) i.getNext()) {
+        for (HashTableEntry<E> i = (HashTableEntry<E>) entryList.getHead(); i != null; i = (HashTableEntry<E>) i
+                .getNext()) {
             if (i.getKey().equals(key))
                 return i.getElt();
         }
@@ -140,5 +154,45 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
         }
         entryList.addAtHead(new HashTableEntry<>(key, elt));
         return true;
+    }
+
+    /**
+     * Returns an array with all the hash table's keys.
+     * 
+     * @return an array with all the hash table's keys
+     */
+    public String[] keySet() {
+        String[] o = new String[this.size()];
+        int counter = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j
+                    .getNext()) {
+                o[counter] = j.getKey();
+                counter++;
+            }
+        }
+        return o;
+    }
+
+    /**
+     * Puts the elements of the hash table (that can fit) into the passed-in array.
+     * The reason this is a "putEltsInArray" and not a "getEltsArray" is because
+     * Java doesn't allow you to create new generic arrays: they have to be passed
+     * in as parameters that are not generic.
+     * 
+     * @param o array to write
+     */
+    public void putEltsInArray(E[] o) {
+        int counter = 0;
+        for (int i = 0; i < this.length(); i++) {
+            for (HashTableEntry<E> j = (HashTableEntry<E>) this.get(i).getHead(); j != null; j = (HashTableEntry<E>) j
+                    .getNext()) {
+                if (counter >= o.length) {
+                    return;
+                }
+                o[counter] = j.getElt();
+                counter++;
+            }
+        }
     }
 }

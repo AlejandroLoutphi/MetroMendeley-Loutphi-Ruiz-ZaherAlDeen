@@ -4,6 +4,7 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +17,11 @@ import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
 import datastructures.LinkedListNode;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Enum for holding the value of what the text parser functions are currently
@@ -509,4 +515,31 @@ public class Functions {
             writer.write(this.newText.toString());
         }
     }
+      public Investigation[] getSortedInvestigationTitles() {
+    int totalEntries = tableByTitle.size();
+    Investigation[] titles = new Investigation[totalEntries];
+    tableByTitle.putEltsInArray(titles);
+    System.out.println("Total entries: " + totalEntries);
+    return titles;
+}
+      public boolean isHashTablePopulated() {
+    // Check if tableByTitle is initialized and not null
+    if (tableByTitle == null) {
+        System.out.println("tableByTitle is not initialized!");
+        return false;
+    }
+    
+    // Check if tableByTitle has entries
+    int size = tableByTitle.size();
+    if (size == 0) {
+        System.out.println("tableByTitle is empty!");
+        return false;
+    }
+    
+    // Optionally, you can print or log the content of the hash table
+    System.out.println("tableByTitle size: " + size);
+    // You may print or log more details about the entries if needed
+    
+    return true;
+}
 }
