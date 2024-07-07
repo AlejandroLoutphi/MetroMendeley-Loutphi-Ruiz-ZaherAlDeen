@@ -15,7 +15,6 @@ public class Investigation {
     private String[] authors;
     private String text;
     private String[] keywords;
-     private String Hola;
 
 
     /**
@@ -115,7 +114,7 @@ public class Investigation {
         this.keywords = keywords;
     }
     
-    public String GetArticleString() {
+    public String getAbstractInfo() {
         String title = this.title;
         String[] authors = this.authors;
         

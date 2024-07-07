@@ -4,7 +4,6 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -158,7 +157,6 @@ public class Functions {
             }
         }
     }
-    
 
     /**
      * Returns a String with an analysis of the passed-in Investigation using the
@@ -318,113 +316,91 @@ public class Functions {
             throw new InvalidParameterException();
         }
     }
-    //Aquí abajo se encuentra todo para traversar el archivo
-    
-    public  String ArticulosPorAutor(String autor){ //Esto será utilizado para el serch UI de keywords y autores
-    String documento = "";
-    for (int i = 0; i < this.tableByAuthor.length(); i++) {
-        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
-            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-            .getNext()) {
+    // Aquí abajo se encuentra todo para traversar el archivo
+
+    public String ArticulosPorAutor(String autor) { // Esto será utilizado para el serch UI de keywords y autores
+        String documento = "";
+        for (int i = 0; i < this.tableByAuthor.length(); i++) {
+            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
+                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+                            .getNext()) {
                 LinkedList<Investigation> key = j.getElt();
-                                
-                if(j.getKey().contains(autor)){ //Lo muestra si es True
+
+                if (j.getKey().contains(autor)) { // Lo muestra si es True
                     System.out.println(j.getKey());
                     LinkedListNode<Investigation> variable = key.getHead();
-                                
-                        while (variable != null){ //Recorre la lista
-                            System.out.println( variable.getElt().GetArticleString()
-                                                    );
-                            documento += variable.getElt().GetArticleString()+ "\n";
-                            variable = variable.getNext();
-                                }
-                                }
-                                
-                            }
-                            
-                        }
-    return documento;
-}
-    
-    public  String ArticulosPorKeyword(String autor){ //Esto será utilizado para el serch UI de keywords y autores
-    String documento = "";
-    for (int i = 0; i < this.tableByKeyword.length(); i++) {
-        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
-            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-            .getNext()) {
+
+                    while (variable != null) { // Recorre la lista
+                        documento += variable.getElt().getAbstractInfo() + "\n";
+                        variable = variable.getNext();
+                    }
+                }
+
+            }
+
+        }
+        return documento;
+    }
+
+    public String ArticulosPorKeyword(String autor) { // Esto será utilizado para el serch UI de keywords y autores
+        String documento = "";
+        for (int i = 0; i < this.tableByKeyword.length(); i++) {
+            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
+                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+                            .getNext()) {
                 LinkedList<Investigation> key = j.getElt();
-                                
-                if(j.getKey().contains(autor)){ //Lo muestra si es True
+
+                if (j.getKey().contains(autor)) { // Lo muestra si es True
                     System.out.println(j.getKey());
                     LinkedListNode<Investigation> variable = key.getHead();
-                                
-                        while (variable != null){ //Recorre la lista
-                            documento += variable.getElt().GetArticleString()+ "\n";
-                            System.out.println( variable.getElt().GetArticleString()
-                                                    );
-                            
-                            variable = variable.getNext();
-                                }
-                                }
-                                
-                            }
-                            
-                        }
-    return documento;
-}
-    
-    public  String ArticulosPorTitle(String Titulo){ //Esto será utilizado para el serch UI de keywords y autores
-    String documento = "";
 
-    for (int i = 0; i < this.tableByTitle.length(); i++) {
-        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
-            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
-            .getNext()) {
-                String key = j.getElt().getTitle();;
-                                
-                if(j.getKey().contains(Titulo)){ //Lo muestra si es True
+                    while (variable != null) { // Recorre la lista
+                        documento += variable.getElt().getAbstractInfo() + "\n";
+                        System.out.println(variable.getElt().getAbstractInfo());
+
+                        variable = variable.getNext();
+                    }
+                }
+
+            }
+
+        }
+        return documento;
+    }
+
+    public String ArticulosPorTitle(String Titulo) { // Esto será utilizado para el serch UI de keywords y autores
+        String documento = "";
+
+        for (int i = 0; i < this.tableByTitle.length(); i++) {
+            for (HashTableEntry<Investigation> j = (HashTableEntry<Investigation>) tableByTitle
+                    .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+                            .getNext()) {
+                if (j.getKey().contains(Titulo)) { // Lo muestra si es True
                     System.out.println(j.getKey());
-                    
-                            String str = String.join(" , ", j.getElt().getAuthors());    
-                            documento += j.getElt().GetArticleString()+ "\n";
-                            System.out.println(j.getElt().GetArticleString()
-                                                    );
-                            
-                                
-                                }
-                                
-                            }
-                            
-                        }
-    return documento;
-}
+                    documento += j.getElt().getAbstractInfo() + "\n";
+                    System.out.println(j.getElt().getAbstractInfo());
 
-    public  String LeerArticulos(){ //Esto será utilizado para el serch UI de keywords y autores
-    String documento = "";
+                }
 
-    for (int i = 0; i < this.tableByTitle.length(); i++) {
-        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
-            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
-            .getNext()) {
-                String key = j.getElt().getTitle();;
-                                
-                //Lo muestra si es True
-                    System.out.println(j.getKey());
-                    
-                            String str = String.join(" , ", j.getElt().getAuthors());    
-                            documento += j.getElt().GetArticleString()+ "\n";
-                            System.out.println(j.getElt().GetArticleString()
-                                                    );
-                            
-                                
-                                
-                                
-                            }
-                            
-                        }
-    return documento;
-}
-    
+            }
+
+        }
+        return documento;
+    }
+
+    public String LeerArticulos() { // Esto será utilizado para el serch UI de keywords y autores
+        String documento = "";
+
+        for (int i = 0; i < this.tableByTitle.length(); i++) {
+            for (HashTableEntry<Investigation> j = (HashTableEntry<Investigation>) tableByTitle
+                    .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+                            .getNext()) {
+                documento += j.getElt().getAbstractInfo() + "\n";
+            }
+
+        }
+        return documento;
+    }
 
     /**
      * Loads the passed-in string into the hash tables and into the newText buffer
@@ -527,31 +503,33 @@ public class Functions {
             writer.write(this.newText.toString());
         }
     }
-      public Investigation[] getSortedInvestigationTitles() {
-    int totalEntries = tableByTitle.size();
-    Investigation[] titles = new Investigation[totalEntries];
-    tableByTitle.putEltsInArray(titles);
-    System.out.println("Total entries: " + totalEntries);
-    return titles;
-}
-      public boolean isHashTablePopulated() {
-    // Check if tableByTitle is initialized and not null
-    if (tableByTitle == null) {
-        System.out.println("tableByTitle is not initialized!");
-        return false;
+
+    public Investigation[] getSortedInvestigationTitles() {
+        int totalEntries = tableByTitle.size();
+        Investigation[] titles = new Investigation[totalEntries];
+        tableByTitle.putEltsInArray(titles);
+        System.out.println("Total entries: " + totalEntries);
+        return titles;
     }
-    
-    // Check if tableByTitle has entries
-    int size = tableByTitle.size();
-    if (size == 0) {
-        System.out.println("tableByTitle is empty!");
-        return false;
+
+    public boolean isHashTablePopulated() {
+        // Check if tableByTitle is initialized and not null
+        if (tableByTitle == null) {
+            System.out.println("tableByTitle is not initialized!");
+            return false;
+        }
+
+        // Check if tableByTitle has entries
+        int size = tableByTitle.size();
+        if (size == 0) {
+            System.out.println("tableByTitle is empty!");
+            return false;
+        }
+
+        // Optionally, you can print or log the content of the hash table
+        System.out.println("tableByTitle size: " + size);
+        // You may print or log more details about the entries if needed
+
+        return true;
     }
-    
-    // Optionally, you can print or log the content of the hash table
-    System.out.println("tableByTitle size: " + size);
-    // You may print or log more details about the entries if needed
-    
-    return true;
-}
 }
