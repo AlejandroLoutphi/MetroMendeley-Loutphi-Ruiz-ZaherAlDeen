@@ -171,6 +171,7 @@ public class Functions {
             throw new IOException();
         }
     }
+    
 
     /**
      * Returns a String with an analysis of the passed-in Investigation using the
@@ -314,6 +315,113 @@ public class Functions {
             throw new IOException();
         }
     }
+    //Aquí abajo se encuentra todo para traversar el archivo
+    
+    public  String ArticulosPorAutor(String autor){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+    for (int i = 0; i < this.tableByAuthor.length(); i++) {
+        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
+            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+            .getNext()) {
+                LinkedList<Investigation> key = j.getElt();
+                                
+                if(j.getKey().contains(autor)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    LinkedListNode<Investigation> variable = key.getHead();
+                                
+                        while (variable != null){ //Recorre la lista
+                            System.out.println( variable.getElt().GetArticleString()
+                                                    );
+                            documento += variable.getElt().GetArticleString()+ "\n";
+                            variable = variable.getNext();
+                                }
+                                }
+                                
+                            }
+                            
+                        }
+    return documento;
+}
+    
+    public  String ArticulosPorKeyword(String autor){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+    for (int i = 0; i < this.tableByKeyword.length(); i++) {
+        for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
+            .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
+            .getNext()) {
+                LinkedList<Investigation> key = j.getElt();
+                                
+                if(j.getKey().contains(autor)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    LinkedListNode<Investigation> variable = key.getHead();
+                                
+                        while (variable != null){ //Recorre la lista
+                            documento += variable.getElt().GetArticleString()+ "\n";
+                            System.out.println( variable.getElt().GetArticleString()
+                                                    );
+                            
+                            variable = variable.getNext();
+                                }
+                                }
+                                
+                            }
+                            
+                        }
+    return documento;
+}
+    
+    public  String ArticulosPorTitle(String Titulo){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+
+    for (int i = 0; i < this.tableByTitle.length(); i++) {
+        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
+            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+            .getNext()) {
+                String key = j.getElt().getTitle();;
+                                
+                if(j.getKey().contains(Titulo)){ //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    
+                            String str = String.join(" , ", j.getElt().getAuthors());    
+                            documento += j.getElt().GetArticleString()+ "\n";
+                            System.out.println(j.getElt().GetArticleString()
+                                                    );
+                            
+                                
+                                }
+                                
+                            }
+                            
+                        }
+    return documento;
+}
+
+    public  String LeerArticulos(){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
+
+    for (int i = 0; i < this.tableByTitle.length(); i++) {
+        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
+            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+            .getNext()) {
+                String key = j.getElt().getTitle();;
+                                
+                //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    
+                            String str = String.join(" , ", j.getElt().getAuthors());    
+                            documento += j.getElt().GetArticleString()+ "\n";
+                            System.out.println(j.getElt().GetArticleString()
+                                                    );
+                            
+                                
+                                
+                                
+                            }
+                            
+                        }
+    return documento;
+}
+    
 
     public boolean parseAndBuildHashTables(String formattedInfo) {
         try {
