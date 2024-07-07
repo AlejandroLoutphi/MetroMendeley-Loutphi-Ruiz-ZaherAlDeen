@@ -37,10 +37,9 @@ public class App {
     public App() {
         this.newText = new StringBuilder();
         this.newText.append("\n");
-        // TODO test hash table to be the correct size
-        this.tableByTitle = new HashTable<>(32);
-        this.tableByAuthor = new HashTable<>(32);
-        this.tableByKeyword = new HashTable<>(32);
+        this.tableByTitle = new HashTable<>(64);
+        this.tableByAuthor = new HashTable<>(64);
+        this.tableByKeyword = new HashTable<>(64);
     }
 
     /**
@@ -402,6 +401,20 @@ public class App {
         tableByTitle.putEltsInArray(titles);
         // TODO add sorting algorithm
         return titles;
+    }
+
+    /**
+     * Returns an array with all investigations with the passed-in title.
+     *
+     * @param title keyword to search for
+     * @return array with all investigations with the passed-in title
+     */
+    public Investigation[] getInvestigationsWithTitle(String title) {
+        Investigation[] o = new Investigation[]{ this.tableByTitle.lookUp(title) };
+        if (o[0] == null) {
+            return new Investigation[0];
+        }
+        return o;
     }
 
     /**

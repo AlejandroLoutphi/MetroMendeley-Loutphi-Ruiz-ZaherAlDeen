@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private String[] Prueba = (new String[] { "Autor", "Palabras Clave" });
+    private String[] Prueba = (new String[] { "Título", "Autor", "Palabras Clave" });
     private App app;
 
     /**
@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
@@ -99,7 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+        jPanel1.add(AddAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
         LoadAbstract.setBackground(new java.awt.Color(179, 199, 247));
         LoadAbstract.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
@@ -109,7 +109,7 @@ public class MainFrame extends javax.swing.JFrame {
                 LoadAbstractActionPerformed(evt);
             }
         });
-        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel1.add(LoadAbstract, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         InstructionsButton.setBackground(new java.awt.Color(250, 175, 144));
         InstructionsButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
@@ -120,7 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
                 InstructionsButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+        jPanel1.add(InstructionsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
 
         SearchHash.setBackground(new java.awt.Color(139, 171, 241));
         SearchHash.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 14)); // NOI18N
@@ -134,7 +134,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 14)); // NOI18N
         jLabel2.setText("Buscar Investigacion Por:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         SearchedKeyword.setFont(new java.awt.Font("ITF Devanagari", 1, 14)); // NOI18N
         SearchedKeyword.setText("Nombre del contenido");
@@ -155,17 +155,17 @@ public class MainFrame extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 110, -1));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 110, -1));
 
         DisplayListButton.setBackground(new java.awt.Color(250, 175, 144));
         DisplayListButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
-        DisplayListButton.setText("Mostrar Investigaciones");
+        DisplayListButton.setText("Mostrar Todas las Investigaciones");
         DisplayListButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplayListButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(DisplayListButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 370, -1));
 
         CloseButton.setBackground(new java.awt.Color(139, 171, 241));
         CloseButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
@@ -231,8 +231,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void SearchHashActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchHashActionPerformed
 
-        if (jComboBox2.getSelectedItem().equals("Autor")) {
-            Investigation[] investigationsWithAuthor = this.app.getInvestigationsWithAuthor(SearchedWord.getText());
+        if (jComboBox2.getSelectedItem().equals("Título")) {
+            Investigation[] investigations = this.app.getInvestigationsWithTitle(SearchedWord.getText().trim());
+            if (investigations.length == 0) {
+                JOptionPane.showMessageDialog(this, "No existen investigaciones con este título", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ShowInvesList displayFrame = new ShowInvesList(this.app, investigations);
+        } else if (jComboBox2.getSelectedItem().equals("Autor")) {
+            Investigation[] investigationsWithAuthor = this.app.getInvestigationsWithAuthor(SearchedWord.getText().trim());
             if (investigationsWithAuthor.length == 0) {
                 JOptionPane.showMessageDialog(this, "No existen investigaciones escritas por este autor", "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -240,7 +248,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             ShowInvesList displayFrame = new ShowInvesList(this.app, investigationsWithAuthor);
         } else {
-            Investigation[] investigationsWithKeyword = this.app.getInvestigationsWithKeyword(SearchedWord.getText());
+            Investigation[] investigationsWithKeyword = this.app.getInvestigationsWithKeyword(SearchedWord.getText().trim());
             if (investigationsWithKeyword.length == 0) {
                 JOptionPane.showMessageDialog(this, "No existen investigaciones con esta palabra clave", "Error",
                         JOptionPane.ERROR_MESSAGE);

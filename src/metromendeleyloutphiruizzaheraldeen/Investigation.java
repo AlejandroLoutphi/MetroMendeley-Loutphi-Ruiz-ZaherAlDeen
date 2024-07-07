@@ -119,17 +119,12 @@ public class Investigation {
      * @return String with a formatted version of this object's attributes
      */
     public String getAbstractInfo() {
-        String title = this.title;
         String[] authors = this.authors;
-
         String abstractBody = this.text;
         String[] keywords = this.keywords;
-        String retornar = "Titulo: " + title + "\n"
-                + "Autores: " + String.join(" , ", authors) + "\n"
-                + "Contenido: " + abstractBody + "\n"
-                + "Palabras Claves: " + String.join(" , ", keywords) + "\n";
-
-        return retornar;
+        return ("Autores: " + String.join(" , ", authors) + "\n\n"
+                + "Resumen:\n" + abstractBody + "\n\n"
+                + "Palabras Claves: " + String.join(" , ", keywords) + "\n");
     }
 
     /**
