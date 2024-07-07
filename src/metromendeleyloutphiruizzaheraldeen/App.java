@@ -24,7 +24,7 @@ import datastructures.LinkedListNode;
  * @author ayahzaheraldeen
  * @author Alejandro Loutphi
  */
-public class Functions {
+public class App {
     private StringBuilder newText;
     private HashTable<Investigation> tableByTitle;
     private HashTable<LinkedList<Investigation>> tableByKeyword;
@@ -32,7 +32,7 @@ public class Functions {
 
     public static final String INPUT_FILE_NAME = "Investigations.txt";
 
-    public Functions() {
+    public App() {
         this.newText = new StringBuilder();
         // TODO test hash table to be the correct size
         this.tableByTitle = new HashTable<>(32);

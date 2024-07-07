@@ -174,20 +174,6 @@ public class ShowInvesList extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form */
-        Functions functions = new Functions();
-    
-    // Assuming tableByTitle is populated somewhere in your application
-    // Call the method to check if it's populated correctly
-    boolean isPopulated = functions.isHashTablePopulated();
-    
-    if (isPopulated) {
-        System.out.println("Hash table tableByTitle is populated correctly!");
-    } else {
-        System.out.println("Hash table tableByTitle is not populated correctly!");
-    }
-
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ShowInvesList(new Functions(), new Investigation[]{new Investigation()}).setVisible(true);

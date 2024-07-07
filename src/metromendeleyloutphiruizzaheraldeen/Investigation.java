@@ -16,7 +16,6 @@ public class Investigation {
     private String text;
     private String[] keywords;
 
-
     /**
      * Constructs an Abstract with all attributes set to null.
      */
@@ -24,7 +23,7 @@ public class Investigation {
         this.title = null;
         this.authors = null;
         this.text = null;
-        this.keywords = null; //Hola
+        this.keywords = null; // Hola
     }
 
     /**
@@ -113,24 +112,25 @@ public class Investigation {
     public void setKeywords(String[] keywords) {
         this.keywords = keywords;
     }
-    
+
+    /**
+     * Returns a String with a formatted version of this object's attributes.
+     *
+     * @return String with a formatted version of this object's attributes
+     */
     public String getAbstractInfo() {
         String title = this.title;
         String[] authors = this.authors;
-        
+
         String abstractBody = this.text;
         String[] keywords = this.keywords;
-        System.out.println("El articulo en cuestion"); //Se puede borrar este print
-        String retornar = 
-                "Titulo: "+ title +"\n" 
-                + "Autores: "+ String.join(" , ", authors) +"\n" 
-                + "Contenido: "+ abstractBody +"\n" 
-                + "Palabras Claves: "+ String.join(" , ", keywords) +"\n" 
-                ;
+        String retornar = "Titulo: " + title + "\n"
+                + "Autores: " + String.join(" , ", authors) + "\n"
+                + "Contenido: " + abstractBody + "\n"
+                + "Palabras Claves: " + String.join(" , ", keywords) + "\n";
 
         return retornar;
     }
-
 
     /**
      * Returns the amount of times the passed-in word appears in the investigation
