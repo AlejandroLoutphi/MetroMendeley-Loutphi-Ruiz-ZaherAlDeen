@@ -171,11 +171,6 @@ public class AddDirectAbstract extends javax.swing.JFrame {
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddButtonActionPerformed
         String formattedInfo = getFormattedInformation();
-
-        // Example: Print the formatted information to console
-        System.out.println("Formatted Information:");
-        System.out.println(formattedInfo);
-
         // Example: Show a message dialog with the formatted information
         JOptionPane.showMessageDialog(this, formattedInfo, "Formatted Information", JOptionPane.INFORMATION_MESSAGE);
 

@@ -16,11 +16,6 @@ import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
 import datastructures.LinkedListNode;
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  * App Class for holding the state and unique functions of the
@@ -39,26 +34,10 @@ public class Functions {
 
     public Functions() {
         this.newText = new StringBuilder();
-        // TODO tests hash table to be the correct size
+        // TODO test hash table to be the correct size
         this.tableByTitle = new HashTable<>(32);
         this.tableByAuthor = new HashTable<>(32);
         this.tableByKeyword = new HashTable<>(32);
-    }
-
-    public StringBuilder getNewText() {
-        return newText;
-    }
-
-    public HashTable<Investigation> getTableByTitle() {
-        return tableByTitle;
-    }
-
-    public HashTable<LinkedList<Investigation>> getTableByKeyword() {
-        return tableByKeyword;
-    }
-
-    public HashTable<LinkedList<Investigation>> getTableByAuthor() {
-        return tableByAuthor;
     }
 
     /**
@@ -72,7 +51,6 @@ public class Functions {
         File file = new File(INPUT_FILE_NAME);
 
         if (!file.exists()) {
-            System.out.println("bruh");
             throw new FileNotFoundException();
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -316,91 +294,6 @@ public class Functions {
             throw new InvalidParameterException();
         }
     }
-    // Aquí abajo se encuentra todo para traversar el archivo
-
-    public String ArticulosPorAutor(String autor) { // Esto será utilizado para el serch UI de keywords y autores
-        String documento = "";
-        for (int i = 0; i < this.tableByAuthor.length(); i++) {
-            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByAuthor
-                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-                            .getNext()) {
-                LinkedList<Investigation> key = j.getElt();
-
-                if (j.getKey().contains(autor)) { // Lo muestra si es True
-                    System.out.println(j.getKey());
-                    LinkedListNode<Investigation> variable = key.getHead();
-
-                    while (variable != null) { // Recorre la lista
-                        documento += variable.getElt().getAbstractInfo() + "\n";
-                        variable = variable.getNext();
-                    }
-                }
-
-            }
-
-        }
-        return documento;
-    }
-
-    public String ArticulosPorKeyword(String autor) { // Esto será utilizado para el serch UI de keywords y autores
-        String documento = "";
-        for (int i = 0; i < this.tableByKeyword.length(); i++) {
-            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
-                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-                            .getNext()) {
-                LinkedList<Investigation> key = j.getElt();
-
-                if (j.getKey().contains(autor)) { // Lo muestra si es True
-                    System.out.println(j.getKey());
-                    LinkedListNode<Investigation> variable = key.getHead();
-
-                    while (variable != null) { // Recorre la lista
-                        documento += variable.getElt().getAbstractInfo() + "\n";
-                        System.out.println(variable.getElt().getAbstractInfo());
-
-                        variable = variable.getNext();
-                    }
-                }
-
-            }
-
-        }
-        return documento;
-    }
-
-    public String ArticulosPorTitle(String Titulo) { // Esto será utilizado para el serch UI de keywords y autores
-        String documento = "";
-
-        for (int i = 0; i < this.tableByTitle.length(); i++) {
-            for (HashTableEntry<Investigation> j = (HashTableEntry<Investigation>) tableByTitle
-                    .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
-                            .getNext()) {
-                if (j.getKey().contains(Titulo)) { // Lo muestra si es True
-                    System.out.println(j.getKey());
-                    documento += j.getElt().getAbstractInfo() + "\n";
-                    System.out.println(j.getElt().getAbstractInfo());
-
-                }
-
-            }
-
-        }
-        return documento;
-    }
-
-    public String LeerArticulos() { // Esto será utilizado para el serch UI de keywords y autores
-        String documento = "";
-
-        for (int i = 0; i < this.tableByTitle.length(); i++) {
-            for (HashTableEntry<Investigation> j = (HashTableEntry<Investigation>) tableByTitle
-                    .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
-                            .getNext()) {
-                documento += j.getElt().getAbstractInfo() + "\n";
-            }
-
-        }
-        return documento;
-    }
 
     /**
      * Loads the passed-in string into the hash tables and into the newText buffer
@@ -484,7 +377,7 @@ public class Functions {
         for (String keyword : keywords) {
             this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
         }
-
+        // TODO make sure this function appends to newText
         return o;
     }
 
@@ -504,32 +397,47 @@ public class Functions {
         }
     }
 
-    public Investigation[] getSortedInvestigationTitles() {
-        int totalEntries = tableByTitle.size();
-        Investigation[] titles = new Investigation[totalEntries];
+    /**
+     * Returns an array with all investigations sorted by their title.
+     *
+     * @return array with all investigations sorted by their title
+     */
+    public Investigation[] getInvestigationsSortedByTitle() {
+        Investigation[] titles = new Investigation[tableByTitle.size()];
         tableByTitle.putEltsInArray(titles);
-        System.out.println("Total entries: " + totalEntries);
+        // TODO add sorting algorithm
         return titles;
     }
 
-    public boolean isHashTablePopulated() {
-        // Check if tableByTitle is initialized and not null
-        if (tableByTitle == null) {
-            System.out.println("tableByTitle is not initialized!");
-            return false;
+    /**
+     * Returns an array with all investigations with the passed-in keyword.
+     *
+     * @param keyword keyword to search for
+     * @return array with all investigations with the passed-in keyword
+     */
+    public Investigation[] getInvestigationsWithKeyword(String keyword) {
+        LinkedList<Investigation> list = this.tableByKeyword.lookUp(keyword);
+        if (list == null) {
+            return new Investigation[0];
         }
+        Investigation[] o = new Investigation[list.size()];
+        list.putInArray(o);
+        return o;
+    }
 
-        // Check if tableByTitle has entries
-        int size = tableByTitle.size();
-        if (size == 0) {
-            System.out.println("tableByTitle is empty!");
-            return false;
+    /**
+     * Returns an array with all investigations with the passed-in author.
+     *
+     * @param author author to search for
+     * @return array with all investigations with the passed-in author
+     */
+    public Investigation[] getInvestigationsWithAuthor(String author) {
+        LinkedList<Investigation> list = this.tableByAuthor.lookUp(author);
+        if (list == null) {
+            return new Investigation[0];
         }
-
-        // Optionally, you can print or log the content of the hash table
-        System.out.println("tableByTitle size: " + size);
-        // You may print or log more details about the entries if needed
-
-        return true;
+        Investigation[] o = new Investigation[list.size()];
+        list.putInArray(o);
+        return o;
     }
 }

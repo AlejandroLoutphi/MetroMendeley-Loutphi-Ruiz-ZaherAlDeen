@@ -10,7 +10,7 @@ Palabras claves: fundaciones directas, AutoCAD, complemento, C#
 
 Arquitectura referencial para mecanismos de Internacionalizaci�n y localizaci�n en PHP.
 Autores
-Christian Guill�n Drija�
+Christian Guill�n-Drija�
 Andrea P�rez
 Carlos Maldonado
 Resumen
