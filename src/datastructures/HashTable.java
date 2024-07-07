@@ -121,8 +121,8 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
      *         no matches
      */
     public E lookUp(String key) {
-        int hash = this.hash(key);
-        return this.lookUpEntryListFor(key, this.get(hash));
+        int hash = this.hash(key.toLowerCase());
+        return this.lookUpEntryListFor(key.toLowerCase(), this.get(hash));
     }
 
     /**
@@ -147,8 +147,8 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
      *         Otherwise, false
      */
     public boolean contains(String key) {
-        int hash = this.hash(key);
-        return this.entryListContains(key, this.get(hash));
+        int hash = this.hash(key.toLowerCase());
+        return this.entryListContains(key.toLowerCase(), this.get(hash));
     }
 
     /**
@@ -159,12 +159,13 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
      * @return true if element could be added. Otherwise, false
      */
     public boolean add(String key, E elt) {
-        int hash = this.hash(key);
+        String lowerKey = key.toLowerCase();
+        int hash = this.hash(lowerKey);
         LinkedList<E> entryList = this.get(hash);
-        if (this.entryListContains(key, entryList)) {
+        if (this.entryListContains(lowerKey, entryList)) {
             return false;
         }
-        entryList.addAtHead(new HashTableEntry<>(key, elt));
+        entryList.addAtHead(new HashTableEntry<>(lowerKey, elt));
         return true;
     }
 
