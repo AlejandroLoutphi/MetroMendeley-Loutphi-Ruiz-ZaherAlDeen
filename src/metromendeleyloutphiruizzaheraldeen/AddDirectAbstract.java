@@ -35,7 +35,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         return true;
     }
 
-    private void getFormattedInformation() {
+    private boolean getFormattedInformation() {
         String title = TitleFetched.getText().trim();
         String authors = AuthorsFetched.getText().trim();
         String text = jTextArea1.getText().trim();
@@ -54,7 +54,7 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         formattedInfo.append("Resumen ").append("\n").append(text).append("\n\n");
 
         formattedInfo.append("Palabras Claves: ").append(keywords.replace(",", ", ")).append("\n");
-        app.addStringtoHashTables(formattedInfo.toString());
+        return app.addStringtoHashTables(formattedInfo.toString());
     }
 
     private void clearFields() {
@@ -158,7 +158,10 @@ public class AddDirectAbstract extends javax.swing.JFrame {
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddButtonActionPerformed
         if (validateFields()) {
-            getFormattedInformation();
+            if (!getFormattedInformation()) {
+            JOptionPane.showMessageDialog(this, "Ya existe una investigación con ese título.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
             clearFields();
         } else {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error",

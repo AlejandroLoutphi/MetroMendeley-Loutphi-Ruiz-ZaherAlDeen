@@ -215,9 +215,11 @@ public class MainFrame extends javax.swing.JFrame {
                 return; // Exit method if format is incorrect
             }
 
-            // Call uploadFile method from Functions class
             try {
-                app.uploadFile(selectedFile.getAbsolutePath());
+                if (!app.uploadFile(selectedFile.getAbsolutePath())) {
+                    JOptionPane.showMessageDialog(this, "Ya existe una investigación con ese título", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this,
                         "Error: " + ex.getMessage(),

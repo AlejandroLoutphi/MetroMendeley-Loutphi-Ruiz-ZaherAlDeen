@@ -181,7 +181,7 @@ public class App {
      * @throws IOException               if file couldn't be read
      * @throws InvalidParameterException if file isn't of the valid format
      */
-    public void uploadFile(String filePath) throws FileNotFoundException, IOException, InvalidParameterException {
+    public boolean uploadFile(String filePath) throws FileNotFoundException, IOException, InvalidParameterException {
         File fileToUpload = new File(filePath);
         if (!fileToUpload.exists()) {
             throw new FileNotFoundException();
@@ -189,7 +189,7 @@ public class App {
         if (!filePath.toLowerCase().endsWith(".txt")) {
             throw new InvalidParameterException();
         }
-        addFileToHashTables(fileToUpload);
+        return addFileToHashTables(fileToUpload);
     }
 
     /**
@@ -201,7 +201,7 @@ public class App {
      * @throws IOException               if file couldn't be read
      * @throws InvalidParameterException if file isn't of the valid format
      */
-    private void addFileToHashTables(File file) throws IOException, InvalidParameterException {
+    private boolean addFileToHashTables(File file) throws IOException, InvalidParameterException {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             LinkedList<String> authorList = new LinkedList<>();
@@ -225,6 +225,10 @@ public class App {
                         investigation = new Investigation();
                         authorList = new LinkedList<>();
                         authorLen = 0;
+
+                        if (this.tableByTitle.contains(line)) {
+                            return false;
+                        }
 
                         investigation.setTitle(line);
                         readingState = ReadingState.AUTHORS;
@@ -274,7 +278,7 @@ public class App {
 
                         reader.close();
                         this.newText.append(fileText);
-                        return;
+                        return true;
                 }
             }
             throw new InvalidParameterException();
@@ -306,6 +310,9 @@ public class App {
 
             switch (readingState) {
                 case TITLE:
+                    if (this.tableByTitle.contains(line)) {
+                        return false;
+                    }
                     title = line; // First line is the title
                     readingState = ReadingState.AUTHORS;
                     break;
@@ -353,7 +360,7 @@ public class App {
         investigation.setKeywords(keywords);
 
         // Populate hash tables
-        boolean o = this.tableByTitle.add(title, investigation);
+        this.tableByTitle.add(title, investigation);
         // Iterate over linkedlist
         for (String author : authorArray) {
             this.tableByAuthor.add(author, new LinkedList<>());
@@ -364,7 +371,7 @@ public class App {
             this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
         }
         this.appendToNewText(info);
-        return o;
+        return true;
     }
 
     /**
