@@ -54,10 +54,10 @@ public class MainFrame extends javax.swing.JFrame {
         SearchedKeyword = new javax.swing.JLabel();
         SearchedWord = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
+        DisplayListButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         InvestigacionesVer = new javax.swing.JButton();
-        DisplayListButton = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -151,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 340, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 280, 170));
 
         InvestigacionesVer.setText("Ver todas las investigaciones");
         InvestigacionesVer.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
                 InvestigacionesVerActionPerformed(evt);
             }
         });
-        jPanel1.add(InvestigacionesVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 220, -1));
+        jPanel1.add(InvestigacionesVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 220, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 300));
 
@@ -221,6 +221,7 @@ public class MainFrame extends javax.swing.JFrame {
         while (count < text.size()){
             System.out.println(text.get(count).getText());
         // TODO Ayah code
+        }
         }
         else if((String) jComboBox2.getSelectedItem() == "Autor"){
         Mostrar = app.ArticulosPorAutor(Palabra);
