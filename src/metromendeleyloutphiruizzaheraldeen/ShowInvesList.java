@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
  */
 public class ShowInvesList extends javax.swing.JFrame {
 
-    Functions app;
+    App app;
     Investigation[] investigations;
 
     /**
      * Creates new form ShowInvesList
      */
-    public ShowInvesList(Functions app, Investigation[] investigations) {
+    public ShowInvesList(App app, Investigation[] investigations) {
         initComponents();
         this.setVisible(true);
         this.app = app;
@@ -176,7 +176,7 @@ public class ShowInvesList extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShowInvesList(new Functions(), new Investigation[]{new Investigation()}).setVisible(true);
+                new ShowInvesList(new App(), new Investigation[]{new Investigation()}).setVisible(true);
             }
         });
     }

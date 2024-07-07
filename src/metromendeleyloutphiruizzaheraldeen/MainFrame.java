@@ -15,16 +15,15 @@ import javax.swing.*;
  * @author ayahzaheraldeen
  */
 public class MainFrame extends javax.swing.JFrame {
-    LinkedList<String> ObjetosMostrar = new LinkedList<String>();
     String[] Prueba = (new String[] { "Autor", "Palabras Clave" });
-    private Functions app;
+    private App app;
 
     /**
      * Creates new form MainFrame
      *
      * @param app app object
      */
-    public MainFrame(Functions app) {
+    public MainFrame(App app) {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -251,7 +250,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame(new Functions()).setVisible(true);
+                new MainFrame(new App()).setVisible(true);
             }
         });
     }

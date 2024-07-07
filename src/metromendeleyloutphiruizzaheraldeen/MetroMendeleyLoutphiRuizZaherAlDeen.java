@@ -15,22 +15,22 @@ import javax.swing.JOptionPane;
  * @author Alejandro Loutphi
  */
 public class MetroMendeleyLoutphiRuizZaherAlDeen {
-            Functions app = new Functions();
+            App app = new App();
     /**
      * Main function for MetroMendeleyLoutphiRuizZaherAlDeen project.
      *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Functions app = new Functions();
+        App app = new App();
         try {
             app.buildHashTables();
             MainFrame mainFrame = new MainFrame(app);
             
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error: archivo de input \"" + Functions.INPUT_FILE_NAME + "\" no existe", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: archivo de input \"" + App.INPUT_FILE_NAME + "\" no existe", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al leer datos del archivo de input \"" + Functions.INPUT_FILE_NAME + "\"", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al leer datos del archivo de input \"" + App.INPUT_FILE_NAME + "\"", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
