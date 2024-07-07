@@ -44,3 +44,7 @@ El estilo arquitectónico conocido como Transferencia de Estado Representacional
 Palabras Claves: REST, GraphQL, cliente-servidor, mecanismo arquitectónico, calidad de software.
 
 
+
+
+
+

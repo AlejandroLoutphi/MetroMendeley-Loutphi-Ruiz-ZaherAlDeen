@@ -392,6 +392,72 @@ public class App {
     }
 
     /**
+     * Returns true if a comes before b alphabetically.
+     * 
+     * @param a String
+     * @param b String
+     * @return true if a comes before b alphabetically
+     */
+    public static boolean comesFirst(String a, String b) {
+        if (a.toLowerCase().compareTo(b.toLowerCase()) <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Makes the tree from the root a max heap based on the titles of the
+     * Investigation objects.
+     * 
+     * @param arr    array to modify
+     * @param length modify the array as if it had this length
+     * @param root   root of tree to operate on
+     */
+    private static void maxHeapify(Investigation[] arr, int length, int root) {
+        int max = root;
+        Investigation temp;
+        int left = 2 * root + 1;
+        int right = 2 * root + 2;
+
+        if (left < length && App.comesFirst(arr[max].getTitle(), arr[left].getTitle())) {
+            max = left;
+        }
+
+        if (right < length && App.comesFirst(arr[max].getTitle(), arr[right].getTitle())) {
+            max = right;
+        }
+
+        if (root != max) {
+            temp = arr[root];
+            arr[root] = arr[max];
+            arr[max] = temp;
+            App.maxHeapify(arr, length, max);
+        }
+    }
+
+    /**
+     * Sorts the array of Investigation objects by their titles aphabetically using
+     * heap sort.
+     * 
+     * @param arr array to sort
+     */
+    public static void heapSortByTitle(Investigation[] arr) {
+        Investigation temp;
+
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            App.maxHeapify(arr, arr.length, i);
+        }
+
+        for (int i = arr.length - 1; i > 0; i--) {
+            temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+            App.maxHeapify(arr, i, 0);
+        }
+    }
+
+    /**
      * Returns an array with all investigations sorted by their title.
      *
      * @return array with all investigations sorted by their title
@@ -399,7 +465,7 @@ public class App {
     public Investigation[] getInvestigationsSortedByTitle() {
         Investigation[] titles = new Investigation[tableByTitle.size()];
         tableByTitle.putEltsInArray(titles);
-        // TODO add sorting algorithm
+        App.heapSortByTitle(titles);
         return titles;
     }
 
@@ -410,7 +476,7 @@ public class App {
      * @return array with all investigations with the passed-in title
      */
     public Investigation[] getInvestigationsWithTitle(String title) {
-        Investigation[] o = new Investigation[]{ this.tableByTitle.lookUp(title) };
+        Investigation[] o = new Investigation[] { this.tableByTitle.lookUp(title) };
         if (o[0] == null) {
             return new Investigation[0];
         }

@@ -259,11 +259,9 @@ public class MainFrame extends javax.swing.JFrame {
     }// GEN-LAST:event_SearchHashActionPerformed
 
     private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
-        // TODO add your handling code here:
     }// GEN-LAST:event_SearchedWordActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
-        // TODO add your handling code here:
     }// GEN-LAST:event_SearchedWordActionPerformed
 
     private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisplayListButtonActionPerformed
