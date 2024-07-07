@@ -107,10 +107,10 @@ public class AddDirectAbstract extends javax.swing.JFrame {
         jLabel3.setText("Autores:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
         jPanel1.add(AuthorsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 300, -1));
-        jPanel1.add(KeywordsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 270, 20));
+        jPanel1.add(KeywordsFetched, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 270, 20));
 
         jLabel4.setText("Palabras Claves:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 100, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 120, -1));
 
         AddButton.setBackground(new java.awt.Color(139, 171, 241));
         AddButton.setText("Agregar");
