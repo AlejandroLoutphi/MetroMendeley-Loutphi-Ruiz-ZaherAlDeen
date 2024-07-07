@@ -4,11 +4,15 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ayahzaheraldeen
  */
 public class ShowInvesList extends javax.swing.JFrame {
+
+    Functions app;
+    Investigation[] investigations;
 
     /**
      * Creates new form ShowInvesList
@@ -16,25 +20,22 @@ public class ShowInvesList extends javax.swing.JFrame {
     public ShowInvesList(Functions app, Investigation[] investigations) {
         initComponents();
         this.setVisible(true);
+        this.app = app;
+        this.investigations = investigations;
         populateInvestigationList();
+        this.jTextArea1.setCaretPosition(0);
+        this.setLocationRelativeTo(null);
+
     }
     
     private void populateInvestigationList() {
-     Functions functions = new Functions();
-    Investigation[] titles = functions.getSortedInvestigationTitles();
     
     // Create a DefaultListModel to store Investigation titles
     DefaultListModel<String> model = new DefaultListModel<>();
     
     // Add Investigation titles to the model
-    for (Investigation investigation : titles) {
-        if (investigation != null && investigation.getTitle() != null) {
-            model.addElement(investigation.getTitle());
-            System.out.println("populated");
-        } else {
-            System.out.println("Investigation or title is null");
-        }
-        System.out.println("Number of titles: " + titles.length);
+    for (Investigation investigation : this.investigations) {
+        model.addElement(investigation.getTitle());
     }
     
     // Set the model to the JList
@@ -53,45 +54,94 @@ public class ShowInvesList extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        ShowAnalysisButton = new javax.swing.JButton();
+        CloseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 230, 219));
+        jPanel1.setForeground(new java.awt.Color(255, 230, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setAutoscrolls(false);
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(jList1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 520, 110));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setAutoscrolls(false);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 490, 260));
+
+        ShowAnalysisButton.setBackground(new java.awt.Color(250, 175, 144));
+        ShowAnalysisButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
+        ShowAnalysisButton.setText("Ver Análisis");
+        ShowAnalysisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowAnalysisButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ShowAnalysisButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 130, -1));
+
+        CloseButton.setBackground(new java.awt.Color(250, 175, 144));
+        CloseButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
+        CloseButton.setText("Cerrar");
+        CloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CloseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        this.jTextArea1.setText(this.investigations[jList1.getSelectedIndex()].getAbstractInfo());
+        this.jTextArea1.setCaretPosition(0);
+
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void ShowAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAnalysisButtonActionPerformed
+        if (this.jList1.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún resumen a analizar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        ShowAnalysis analysisWindow = new ShowAnalysis(this.app, this.investigations[jList1.getSelectedIndex()]);
+    }//GEN-LAST:event_ShowAnalysisButtonActionPerformed
+
+    private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_CloseButtonActionPerformed
+    
     /**
      * @param args the command line arguments
-     */
-    
-    
+     */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
@@ -146,8 +196,12 @@ public class ShowInvesList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CloseButton;
+    private javax.swing.JButton ShowAnalysisButton;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,6 @@
  */
 package metromendeleyloutphiruizzaheraldeen;
 
-import datastructures.HashTableEntry;
 import datastructures.LinkedList;
 import javax.swing.JFileChooser;
 
@@ -243,8 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_InvestigacionesVerActionPerformed
 
     private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisplayListButtonActionPerformed
-        /*ShowInvesList displayFrame = new ShowInvesList(this.app, );
-        displayFrame.setVisible(true);*/
+        ShowInvesList displayFrame = new ShowInvesList(this.app, this.app.getSortedInvestigationTitles());
 
     }// GEN-LAST:event_DisplayListButtonActionPerformed
 
