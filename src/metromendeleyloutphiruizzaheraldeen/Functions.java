@@ -309,6 +309,7 @@ public class Functions {
             throw new IOException();
         }
     }
+    //Aquí abajo se encuentra todo para traversar el archivo
     
     public  String ArticulosPorAutor(String autor){ //Esto será utilizado para el serch UI de keywords y autores
     String documento = "";
@@ -389,7 +390,31 @@ public class Functions {
     return documento;
 }
 
+    public  String LeerArticulos(){ //Esto será utilizado para el serch UI de keywords y autores
+    String documento = "";
 
+    for (int i = 0; i < this.tableByTitle.length(); i++) {
+        for (HashTableEntry<Investigation>j = (HashTableEntry<Investigation>) tableByTitle
+            .get(i).getHead(); j != null; j = (HashTableEntry<Investigation>) j
+            .getNext()) {
+                String key = j.getElt().getTitle();;
+                                
+                //Lo muestra si es True
+                    System.out.println(j.getKey());
+                    
+                            String str = String.join(" , ", j.getElt().getAuthors());    
+                            documento += j.getElt().GetArticleString()+ "\n";
+                            System.out.println(j.getElt().GetArticleString()
+                                                    );
+                            
+                                
+                                
+                                
+                            }
+                            
+                        }
+    return documento;
+}
     
 
     public boolean parseAndBuildHashTables(String formattedInfo) {

@@ -56,6 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        InvestigacionesVer = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -114,7 +115,15 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 340, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 340, 190));
+
+        InvestigacionesVer.setText("Ver todas las investigaciones");
+        InvestigacionesVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InvestigacionesVerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(InvestigacionesVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 220, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 300));
 
@@ -191,6 +200,14 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void InvestigacionesVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InvestigacionesVerActionPerformed
+        // TODO add your handling code here:
+        String Mostrar = "";
+        Mostrar =     app.LeerArticulos();
+        jTextArea1.setText(Mostrar);
+        
+    }//GEN-LAST:event_InvestigacionesVerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAbstract;
     private javax.swing.JButton InstructionsButton;
+    private javax.swing.JButton InvestigacionesVer;
     private javax.swing.JButton LoadAbstract;
     private javax.swing.JButton SearchHash;
     private javax.swing.JLabel SearchedKeyword;
