@@ -174,4 +174,19 @@ public class Investigation {
         }
         return false;
     }
+
+    /**
+     * Returns true if the passed-in word is one of this object's keywords.
+     *
+     * @param word String with word to compare
+     * @return true if the passed-in word is oe of this object's keywords
+     */
+    public boolean isKeyword(String word) {
+        for (int i = 0; i < keywords.length; i++) {
+            if (word == keywords[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

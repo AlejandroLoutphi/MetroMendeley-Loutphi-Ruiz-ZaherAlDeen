@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import javax.swing.JOptionPane;
 import datastructures.LinkedList;
 import datastructures.HashTable;
 import datastructures.HashTableEntry;
@@ -25,16 +26,18 @@ import datastructures.LinkedListNode;
  * @author Alejandro Loutphi
  */
 public class Functions {
+
     private StringBuilder newText;
     private HashTable<Investigation> tableByTitle;
     private HashTable<LinkedList<Investigation>> tableByKeyword;
     private HashTable<LinkedList<Investigation>> tableByAuthor;
+    private boolean isAdmin;
 
     public static final String INPUT_FILE_NAME = "Investigations.txt";
-     public static final String OUTPUT_FILE_NAME = "Investigations.txt";
 
     public Functions() {
         this.newText = new StringBuilder();
+        this.newText.append("\n");
         // TODO test hash table to be the correct size
         this.tableByTitle = new HashTable<>(32);
         this.tableByAuthor = new HashTable<>(32);
@@ -110,28 +113,18 @@ public class Functions {
 
                         keywordArray = line.split(", ");
                         investigation.setKeywords(keywordArray);
-                        for (int i = 0; i < keywordArray.length; i++) {
-                            this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
-                        }
                         readingState = ReadingState.TITLE;
 
                         // Add the investigation object to all the hash tables
                         this.tableByTitle.add(investigation.getTitle(), investigation);
                         for (int i = 0; i < authorArray.length; i++) {
+                            this.tableByAuthor.add(authorArray[i], new LinkedList<>());
                             this.tableByAuthor.lookUp(authorArray[i]).addAtHead(investigation);
                         }
-
-                        // For each entry in the Keyword Hash Table, add the current investigation if it
-                        // contains its keyword
-                        for (int i = 0; i < this.tableByKeyword.length(); i++) {
-                            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
-                                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-                                            .getNext()) {
-                                if (investigation.contains(j.getKey()))
-                                    j.getElt().addAtHead(investigation);
-                            }
+                        for (int i = 0; i < keywordArray.length; i++) {
+                            this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
+                            this.tableByKeyword.lookUp(keywordArray[i]).addAtHead(investigation);
                         }
-                        break;
                 }
             }
         }
@@ -272,21 +265,14 @@ public class Functions {
                         // Add to hash tables
                         for (int i = 0; i < keywordArray.length; i++) {
                             this.tableByKeyword.add(keywordArray[i], new LinkedList<>());
+                            this.tableByKeyword.lookUp(keywordArray[i]).addAtHead(investigation);
                         }
-                        this.tableByTitle.add(investigation.getTitle(), investigation);
                         for (int i = 0; i < authorArray.length; i++) {
+                            this.tableByAuthor.add(authorArray[i], new LinkedList<>());
                             this.tableByAuthor.lookUp(authorArray[i]).addAtHead(investigation);
                         }
-                        // For each entry in the Keyword Hash Table, add the current investigation if it
-                        // contains its keyword
-                        for (int i = 0; i < this.tableByKeyword.length(); i++) {
-                            for (HashTableEntry<LinkedList<Investigation>> j = (HashTableEntry<LinkedList<Investigation>>) tableByKeyword
-                                    .get(i).getHead(); j != null; j = (HashTableEntry<LinkedList<Investigation>>) j
-                                            .getNext()) {
-                                if (investigation.contains(j.getKey()))
-                                    j.getElt().addAtHead(investigation);
-                            }
-                        }
+                        this.tableByTitle.add(investigation.getTitle(), investigation);
+
                         reader.close();
                         this.newText.append(fileText);
                         return;
@@ -305,7 +291,7 @@ public class Functions {
      * @return false if the input investigation's name already exists. Otherwise,
      *         true.
      */
-    public boolean parseAndBuildHashTables(String info) {
+    public boolean addStringtoHashTables(String info) {
         String[] lines = info.split("\n");
 
         String title = "";
@@ -340,7 +326,7 @@ public class Functions {
 
                 case TEXT:
                     authorArray = new String[authorlen];
-                    authorsList.add(line);
+                    authorsList.putInArray(authorArray);
                     readingState = ReadingState.KEYWORDS;
                     break;
 
@@ -369,16 +355,16 @@ public class Functions {
 
         // Populate hash tables
         boolean o = this.tableByTitle.add(title, investigation);
-        String author;
         // Iterate over linkedlist
-        for (LinkedListNode<String> i = authorsList.getHead(); i != null; i = i.getNext()) {
-            author = i.getElt();
+        for (String author : authorArray) {
+            this.tableByAuthor.add(author, new LinkedList<>());
             this.tableByAuthor.lookUp(author).addAtHead(investigation);
         }
         for (String keyword : keywords) {
+            this.tableByKeyword.add(keyword, new LinkedList<>());
             this.tableByKeyword.lookUp(keyword).addAtHead(investigation);
         }
-        // TODO make sure this function appends to newText
+        this.appendToNewText(info);
         return o;
     }
 
@@ -389,23 +375,14 @@ public class Functions {
      * @throws IOException if the file couldn't be written
      */
     public void appendNewTextToFile() throws IOException {
-         
-        File fileToWrite = new File(OUTPUT_FILE_NAME);
 
-        // Create the file if it doesn't exist
-        if (!fileToWrite.exists()) {
-            boolean created = fileToWrite.createNewFile();
-            if (!created) {
-                throw new IOException("Failed to create file: " + OUTPUT_FILE_NAME);
-            }
-        }
+        File fileToWrite = new File(INPUT_FILE_NAME);
 
         // Append newText to the file using FileWriter with append mode
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToWrite, true))) {
             writer.append(newText.toString());
-            writer.newLine(); // Optionally, add a new line after each append
-            writer.flush(); // Ensure data is written to the file
-            System.out.println("Successfully appended to file: " + OUTPUT_FILE_NAME);
+            writer.newLine();
+            writer.flush();
         }
     }
 
@@ -452,20 +429,53 @@ public class Functions {
         list.putInArray(o);
         return o;
     }
+
     /**
-     * Appends the new investigation details into a string variable newText
+     * Appends the new investigation details into a string variable newText.
+     *
      * @param formattedInfo new entered investigation details/information
      */
     public void appendToNewText(String formattedInfo) {
         // Append formattedInfo to newText
         newText.append(formattedInfo);
-        
+
     }
-    /**Returns a boolean that checks if the newText string is empty or not
+
+    /**
+     * Returns a boolean that checks if the newText string is empty or not.
      * 
      * @return a boolean that checks if newText is filled
      */
     public boolean isStringNotEmpty() {
-        return newText != null && !newText.isEmpty();
+        return (newText != null) && (newText.length() != 0);
     }
+
+    /**
+     * Returns true if the user has entered the password correctly once. Otherwise,
+     * false. Prompts the user with JOptionPane to enter the password if he hasn't
+     * already.
+     * 
+     * @return true if the user has entered the password correctly once. Otherwise,
+     *         false
+     */
+    public boolean isAdmin() {
+        if (this.isAdmin)
+            return true;
+        String correctPassword = "EDD2024";
+
+        while (true) {
+            String password = JOptionPane.showInputDialog(null, "Insertar contraseña para cargar archivo:");
+
+            if (password == null) {
+                return false;
+            } else if (password.equals(correctPassword)) {
+                this.isAdmin = true;
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta",
+                        "Contraseña Incorrecta", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
 }

@@ -18,6 +18,7 @@ public class ShowAnalysis extends javax.swing.JFrame {
         this.setVisible(true);
         this.jTextArea1.setText(app.analysis(investigation));
         this.jTextArea1.setCaretPosition(0);
+        this.jTextArea1.setEditable(false);
         this.setLocationRelativeTo(null);
 
     }
@@ -51,7 +52,7 @@ public class ShowAnalysis extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 400));
 
-        CloseButton.setBackground(new java.awt.Color(250, 175, 144));
+        CloseButton.setBackground(new java.awt.Color(139, 171, 241));
         CloseButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
         CloseButton.setText("Cerrar");
         CloseButton.addActionListener(new java.awt.event.ActionListener() {

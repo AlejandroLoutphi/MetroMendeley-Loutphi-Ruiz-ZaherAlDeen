@@ -72,7 +72,7 @@
         <Component class="javax.swing.JButton" name="CloseButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="90" green="af" red="fa" type="rgb"/>
+              <Color blue="f1" green="ab" red="8b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="ITF Devanagari Marathi" size="13" style="1"/>

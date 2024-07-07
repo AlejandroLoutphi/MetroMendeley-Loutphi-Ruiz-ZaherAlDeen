@@ -16,6 +16,7 @@ public class InstructionsFrame extends javax.swing.JFrame {
     public InstructionsFrame() {
         initComponents();
         this.jTextArea1.setEditable(false);
+        this.jTextArea1.setCaretPosition(0);
     }
 
     /**
@@ -30,9 +31,9 @@ public class InstructionsFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        CloseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -47,12 +48,7 @@ public class InstructionsFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("ITF Devanagari", 3, 15)); // NOI18N
         jLabel1.setText("Lea atentamente las instrucciones antes de utilizar la aplicación.");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 30));
-
-        jLabel2.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel2.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 11)); // NOI18N
-        jLabel2.setText("¡BIENVENIDO A NUESTRA APLICACIÓN DE ANÁLISIS INTEGRAL DE INVESTIGACIÓN!");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 530, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 30));
 
         jTextArea1.setBackground(new java.awt.Color(255, 230, 219));
         jTextArea1.setColumns(20);
@@ -63,10 +59,24 @@ public class InstructionsFrame extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 460, 250));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 350));
+        CloseButton.setBackground(new java.awt.Color(139, 171, 241));
+        CloseButton.setFont(new java.awt.Font("ITF Devanagari Marathi", 1, 13)); // NOI18N
+        CloseButton.setText("Cerrar");
+        CloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CloseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 160, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_CloseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,8 +114,8 @@ public class InstructionsFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CloseButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
