@@ -27,27 +27,39 @@ public class HashTable<E> extends GenericArray<LinkedList<E>> {
     }
 
     /**
-     * Hash function returning position of element with passed-in key.
+     * Hash function some int corresponding to passed-in key.
      * 
      * @param key String to be hashed
-     * @return position of element with passed-in key
+     * @param x number to which mod the result
+     * @return some int corresponding to passed-in key.
      */
-    public int hash(String key) {
+    public static int hashModX(String key, int x) {
         int len = key.length();
         if (len < 3) {
             return 0;
         }
 
         // Do something kinda random with the first and last few characters
+        // These magic numbers are all primes
         int o = key.charAt(0)
-                - 3 * key.charAt(1)
-                + 5 * key.charAt(2)
-                - 9 * key.charAt(len - 3)
-                + 17 * key.charAt(len - 2)
-                - 33 * key.charAt(len - 1);
+                - 1223 * key.charAt(1)
+                + 863 * key.charAt(2)
+                - 541 * key.charAt(len - 3)
+                + 1987 * key.charAt(len - 2)
+                - 673 * key.charAt(len - 1);
         if (o < 0)
             o = -o;
-        return o % this.length();
+        return o % x;
+    }
+
+    /**
+     * Hash function returning position of element with passed-in key.
+     * 
+     * @param key String to be hashed
+     * @return position of element with passed-in key
+     */
+    public int hash(String key) {
+        return HashTable.hashModX(key, this.length());
     }
 
     /**

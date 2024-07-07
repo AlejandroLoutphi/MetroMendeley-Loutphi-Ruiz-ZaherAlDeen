@@ -461,14 +461,14 @@ public class Functions {
     public boolean isAdmin() {
         if (this.isAdmin)
             return true;
-        String correctPassword = "EDD2024";
+        final int correctHash = 23749;
 
         while (true) {
             String password = JOptionPane.showInputDialog(null, "Insertar contraseña para cargar archivo:");
 
             if (password == null) {
                 return false;
-            } else if (password.equals(correctPassword)) {
+            } else if (HashTable.hashModX(password, 100000) == correctHash) {
                 this.isAdmin = true;
                 return true;
             } else {
