@@ -5,6 +5,7 @@
 package metromendeleyloutphiruizzaheraldeen;
 
 /**
+ * Window for displaying app instructions.
  *
  * @author ayahzaheraldeen
  */
@@ -15,6 +16,7 @@ public class InstructionsFrame extends javax.swing.JFrame {
      */
     public InstructionsFrame() {
         initComponents();
+        this.setVisible(true);
         this.jTextArea1.setEditable(false);
         this.jTextArea1.setCaretPosition(0);
     }
@@ -74,6 +76,9 @@ public class InstructionsFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Closes this window.
+     */
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_CloseButtonActionPerformed

@@ -5,13 +5,18 @@
 package metromendeleyloutphiruizzaheraldeen;
 
 /**
+ * Window showing the "analysis" performed on an investigation object
  *
  * @author ayahzaheraldeen
+ * @author Alejandro Loutphi
  */
 public class ShowAnalysis extends javax.swing.JFrame {
 
     /**
-     * Creates new form ShowInvesList
+     * Creates new form ShowAnalysis.
+     *
+     * @param app global app object
+     * @param investigation Investigation object to analyze
      */
     public ShowAnalysis(App app, Investigation investigation) {
         initComponents();
@@ -76,6 +81,9 @@ public class ShowAnalysis extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Closes the window.
+     */
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ShowAnalysisButtonActionPerformed
         this.dispose();
     }// GEN-LAST:event_ShowAnalysisButtonActionPerformed

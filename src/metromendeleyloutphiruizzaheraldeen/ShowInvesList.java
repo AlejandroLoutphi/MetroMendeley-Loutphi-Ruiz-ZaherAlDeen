@@ -8,8 +8,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
+ * Window to show list of Investigation objects
  *
  * @author ayahzaheraldeen
+ * @author Alejandro Loutphi
+ * @author Luciano Ruiz
  */
 public class ShowInvesList extends javax.swing.JFrame {
 
@@ -17,7 +20,10 @@ public class ShowInvesList extends javax.swing.JFrame {
     Investigation[] investigations;
 
     /**
-     * Creates new form ShowInvesList
+     * Creates new form ShowInvesList.
+     *
+     * @param app global app object
+     * @param investigations array of Investigation to show
      */
     public ShowInvesList(App app, Investigation[] investigations) {
         initComponents();
@@ -30,6 +36,9 @@ public class ShowInvesList extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Populates the Investigation list with the investigation object in investigations attribute.
+     */
     private void populateInvestigationList() {
 
         // Create a DefaultListModel to store Investigation titles
@@ -127,12 +136,19 @@ public class ShowInvesList extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Set the text of jTextArea1 to the currently-selected investigation's info
+     */
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {// GEN-FIRST:event_jList1ValueChanged
         this.jTextArea1.setText(this.investigations[jList1.getSelectedIndex()].getAbstractInfo());
         this.jTextArea1.setCaretPosition(0);
 
     }// GEN-LAST:event_jList1ValueChanged
 
+    /**
+     * Constructs ShowAnalysis window based on the currently selected Investigation
+     * @param evt
+     */
     private void ShowAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ShowAnalysisButtonActionPerformed
         if (this.jList1.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún resumen a analizar", "Error",
@@ -141,6 +157,9 @@ public class ShowInvesList extends javax.swing.JFrame {
         ShowAnalysis analysisWindow = new ShowAnalysis(this.app, this.investigations[jList1.getSelectedIndex()]);
     }// GEN-LAST:event_ShowAnalysisButtonActionPerformed
 
+    /**
+     * Closes window.
+     */
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CloseButtonActionPerformed
         this.dispose();
     }// GEN-LAST:event_CloseButtonActionPerformed

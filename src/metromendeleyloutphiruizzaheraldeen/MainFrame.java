@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
+ * Main window for this app.
  *
  * @author ayahzaheraldeen
  */
@@ -41,6 +42,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Appends saved data to input file.
+     */
     private void saveDataOnClose() {
         if (app.isStringNotEmpty()) {
             try {
@@ -59,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed"
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -141,20 +146,10 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.add(SearchedKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 270, 20));
 
         SearchedWord.setBackground(new java.awt.Color(139, 171, 241));
-        SearchedWord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchedWordActionPerformed(evt);
-            }
-        });
         jPanel1.add(SearchedWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 270, -1));
 
         jComboBox2.setBackground(new java.awt.Color(139, 171, 241));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Prueba));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 110, -1));
 
         DisplayListButton.setBackground(new java.awt.Color(250, 175, 144));
@@ -182,6 +177,9 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Appends saved data to input file and quits program.
+     */
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CloseButtonActionPerformed
         try {
             this.app.appendNewTextToFile();
@@ -193,13 +191,21 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_CloseButtonActionPerformed
 
+    /**
+     * Prompts the user with a JFileChooser window to choose a file in the abstract
+     * format to add to the database. If user is not admin, prompts user to input
+     * the password.
+     */
     private void LoadAbstractActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_LoadAbstractActionPerformed
         if (app.isAdmin()) {
             loadSelectedFile();
         }
     }
 
-    // Method to handle file loading
+    /**
+     * Prompts the user with a JFileChooser window to choose a file in the abstract
+     * format to add to the database.
+     */
     private void loadSelectedFile() {
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
@@ -229,6 +235,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     }// GEN-LAST:event_LoadAbstractActionPerformed
 
+    /**
+     * Searches database for all investigations with title, keyword, or author
+     * specified by the user. Opens a ShowInvesList window with the results.
+     */
     private void SearchHashActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchHashActionPerformed
 
         if (jComboBox2.getSelectedItem().equals("Título")) {
@@ -240,7 +250,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             ShowInvesList displayFrame = new ShowInvesList(this.app, investigations);
         } else if (jComboBox2.getSelectedItem().equals("Autor")) {
-            Investigation[] investigationsWithAuthor = this.app.getInvestigationsWithAuthor(SearchedWord.getText().trim());
+            Investigation[] investigationsWithAuthor = this.app
+                    .getInvestigationsWithAuthor(SearchedWord.getText().trim());
             if (investigationsWithAuthor.length == 0) {
                 JOptionPane.showMessageDialog(this, "No existen investigaciones escritas por este autor", "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -248,7 +259,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             ShowInvesList displayFrame = new ShowInvesList(this.app, investigationsWithAuthor);
         } else {
-            Investigation[] investigationsWithKeyword = this.app.getInvestigationsWithKeyword(SearchedWord.getText().trim());
+            Investigation[] investigationsWithKeyword = this.app
+                    .getInvestigationsWithKeyword(SearchedWord.getText().trim());
             if (investigationsWithKeyword.length == 0) {
                 JOptionPane.showMessageDialog(this, "No existen investigaciones con esta palabra clave", "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -264,22 +276,30 @@ public class MainFrame extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
     }// GEN-LAST:event_SearchedWordActionPerformed
 
+    /**
+     * Opens a ShowInvesList window with all the abstracts stored in the database in
+     * alphabetical order.
+     */
     private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisplayListButtonActionPerformed
         ShowInvesList displayFrame = new ShowInvesList(this.app, this.app.getInvestigationsSortedByTitle());
 
     }// GEN-LAST:event_DisplayListButtonActionPerformed
 
+    /**
+     * Opens an AddDirectAbstract window. If user isn't admin, prompts him to insert
+     * password.
+     */
     private void AddAbstractActionPerformed(java.awt.event.ActionEvent evt) {
         if (app.isAdmin()) {
             AddDirectAbstract addDirectAbstract = new AddDirectAbstract(this.app);
         }
     }// GEN-LAST:event_AddAbstractActionPerformed
 
+    /**
+     * Opens an InstructionsFrame window.
+     */
     private void InstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_InstructionsButtonActionPerformed
-        if (evt.getSource() == InstructionsButton) {
-            InstructionsFrame instructionsFrame = new InstructionsFrame();
-            instructionsFrame.setVisible(true);
-        }
+        InstructionsFrame instructionsFrame = new InstructionsFrame();
     }// GEN-LAST:event_InstructionsButtonActionPerformed
 
     /**
