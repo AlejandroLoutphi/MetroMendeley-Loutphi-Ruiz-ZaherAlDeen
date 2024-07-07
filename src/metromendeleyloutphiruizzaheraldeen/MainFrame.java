@@ -222,16 +222,15 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1.setText(Mostrar);
 
        // app.ArticulosPorAutor(Palabra);
-//       app.ArticulosPorTitle(Palabra);
-        
-   
-        
-        
-    }//GEN-LAST:event_SearchHashActionPerformed
+//       app.ArticulosPorTitle(Palabra);                                      
 
     }// GEN-LAST:event_SearchHashActionPerformed
 
     private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_SearchedWordActionPerformed
+    
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_SearchedWordActionPerformed
 
@@ -242,13 +241,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1.setText(Mostrar);
         
     }//GEN-LAST:event_InvestigacionesVerActionPerformed
-    private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayListButtonActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jComboBox2ActionPerformed
 
     private void DisplayListButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisplayListButtonActionPerformed
-        ShowInvesList displayFrame = new ShowInvesList();
-        displayFrame.setVisible(true);
+        /*ShowInvesList displayFrame = new ShowInvesList(this.app, );
+        displayFrame.setVisible(true);*/
 
     }// GEN-LAST:event_DisplayListButtonActionPerformed
 
