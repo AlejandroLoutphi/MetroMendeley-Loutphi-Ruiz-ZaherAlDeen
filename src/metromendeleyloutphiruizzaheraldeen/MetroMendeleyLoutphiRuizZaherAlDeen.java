@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  * @author Alejandro Loutphi
  */
 public class MetroMendeleyLoutphiRuizZaherAlDeen {
-            App app = new App();
     /**
      * Main function for MetroMendeleyLoutphiRuizZaherAlDeen project.
      *

@@ -20,8 +20,6 @@ Los procesos de internacionalización y localización inciden directamente en la
 
 Palabras Claves: análisis de dominio, ingeniería de dominio, PHP, arquitectura referencial, internacionalización y localización.
 
-
-
 Sistema de diseño basado en Grid
 Autores
 José Invernón
@@ -31,7 +29,6 @@ Resumen
 Los frameworks de diseño son conjuntos articulados de elementos y componentes gráficos que se rigen por patrones o guías de diseño. Estos favorecen el desarrollo rápido de aplicaciones web sobre la base de criterios de diseño consistentes. La mayoría de los frameworks de Frontend, basan su implementación en elementos que se distribuyen en una sola dimensión, es decir, hacen uso de Flexbox, lo cual limita el control estructural del contenido. El presente estudio, estuvo centrado en la realización de un sistema de diseño basado en Grid para interfaces gráficas de aplicaciones web. Para ello, se categorizaron los elementos de las guías de diseño de UX/UI del sistema planteado, los cuales componen los patrones que permiten definir el estilo de sus componentes. Posteriormente, se hizo una comparación entre los siguientes frameworks: Bootstrap, Clarity Design y Material Design, con el fin de seleccionar los componentes de interfaz que constituyesen el sistema de diseño propuesto en este trabajo de investigación. En una siguiente fase, se procedió a construir tales componentes con base en las propiedades de Grid. Además, se construyó un caso de estudio al que se le aplicó un conjunto de escenarios de pruebas que permitió validar la efectividad del sistema de diseño basado en Grid como herramienta para la construcción de los componentes de interfaz de usuario en el ámbito del desarrollo de aplicaciones Web. Posteriormente, el sistema de diseño obtenido se aplicó a un caso de estudio que consistió en un catálogo de componentes y guías de estilo. Ambos productos son de dominio público, de manera que los potenciales usuarios del sistema de diseño pueden acceder de manera gratuita a la hoja de estilo que especifica las clases constituyentes, así como a una documentación detallada y extensa sobre su uso. Esta investigación permitió demostrar que es posible diseñar componentes de interfaz de usuario basados en propiedades Grid. Dichas propiedades permiten ordenar y posicionar los elementos del HTML de forma práctica y sencilla, haciendo uso de dos dimensiones; además de facilitar el desarrollo de sitios web responsivos. Aun cuando es posible crear elementos de interfaz de usuario solo con la propiedad Grid, como se demostró en este trabajo, su combinación con Flexbox, potencia la creación tanto de componentes como de aplicaciones debido a que con el primero, se define la estructura y con el segundo, se distribuye el contenido en cada sección.
 Palabras claves: diseño, componentes, sistema de diseño, Grid, hojas de estilo, UX/UI.
 
-
 GraphQL vs REST: una comparación desde la perspectiva de eficiencia de desempeño.
 Autores
 Christian Guillén Drija
@@ -40,13 +37,7 @@ Asher Kleiman
 Resumen
 El estilo arquitectónico conocido como Transferencia de Estado Representacional (REST según sus siglas en inglés) ha modelado y estandarizado  la  comunicación cliente-servidor a través del protocolo de transferencia de hipertexto (HTTP). Según Roy Fielding, creador de REST,  este estilo consiste en un conjunto de restricciones arquitectónicas que enfatizan la escalabilidad de las interacciones entre los componentes, así como la generalidad las interfaces utilizadas, el despliegue independiente de dichos componentes, la aplicación de componentes intermediarios para la reducción de la latencia, la preponderancia de la seguridad y la encapsulación de los sistemas Legacy. Como consecuencia, REST se ha convertido en el estilo más aplicado en la comunicación con una Interfaz de Programación de Aplicaciones (API). Por otra parte, GraphQL es una tecnología basada en un lenguaje de consultas de datos para API’s que se ha constituido en una alternativa al estilo REST. En este trabajo de investigación, se realizó una comparación de REST y GraphQL como mecanismos arquitectónicos desde una perspectiva de calidad, específicamente  centrada en la  Eficiencia de Desempeño, en el marco del estándar ISO/IEC 9126 e ISO/IEC 25000. Las subcaracterísticas de Eficiencia de Desempeño evaluadas fueron: Comportamiento Temporal, Utilización de Recursos y Capacidad. Para cada una de dichas subcaracterísticas, se aplicaron métricas, a saber: para el Comportamiento Temporal se aplicaron las métricas Tiempo de Respuesta y Rendimiento; para la Utilización de Recursos, se aplicaron las métricas: Utilización de la Memoria, Utilización de Caché, Overfetching y Underfetching; y para Capacidad, se aplicaron las métricas Capacidad y Velocidad Bajo Estrés. Para el desarrollo de este trabajo se seleccionó un caso de estudio que permitiera evidenciar las características de los dos mecanismos. Asimismo, para la obtención de datos cuantitativos que permitiesen establecer comparaciones, se diseñaron dos API’s que, con base en el caso de estudio escogido, respondieran fielmente a las restricciones que caracterizan a los dos mecanismos arquitectónicos. Los resultados obtenidos, una vez ejecutados los casos de prueba, permiten inferir que REST posee una mayor rapidez de respuesta que GraphQL. Debido a la naturaleza dinámica de las peticiones que pueden realizarse en las que se puede especificar con mayor granularidad la información requerida a través de consultas anidadas, GraphQL parece ser más eficiente en lo relativo al underfetching y al overfetching. En general, GraphQL debería utilizarse cuando se requiere menor utilización de la memoria, cuando los recursos que la API maneja están estrechamente relacionados y cuando no sea necesario utilizar la totalidad de la información obtenida. Por otra parte, REST debería utilizarse en caso de necesitarse mayor velocidad de respuesta y cuando se requiera utilizar la totalidad de la información de los recursos manejados. 
 
-
 Palabras Claves: REST, GraphQL, cliente-servidor, mecanismo arquitectónico, calidad de software.
-
-
-
-
-
 
 
 

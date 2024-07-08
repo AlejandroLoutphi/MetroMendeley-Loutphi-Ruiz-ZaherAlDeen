@@ -176,6 +176,7 @@ public class App {
      * newText buffer for saving.
      *
      * @param filePath path of file to load
+     * @return false if operation failed. Otherwise, true.
      * @throws FileNotFoundException     if file doesn't exist
      * @throws IOException               if file couldn't be read
      * @throws InvalidParameterException if file isn't of the valid format
@@ -398,7 +399,7 @@ public class App {
      * @param b String
      * @return true if a comes before b alphabetically
      */
-    public static boolean comesFirst(String a, String b) {
+    private static boolean comesFirst(String a, String b) {
         if (a.toLowerCase().compareTo(b.toLowerCase()) <= 0) {
             return true;
         } else {
@@ -442,7 +443,7 @@ public class App {
      * 
      * @param arr array to sort
      */
-    public static void heapSortByTitle(Investigation[] arr) {
+    private static void heapSortByTitle(Investigation[] arr) {
         Investigation temp;
 
         for (int i = arr.length / 2 - 1; i >= 0; i--) {

@@ -270,12 +270,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_SearchHashActionPerformed
 
-    private void SearchedWordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
-    }// GEN-LAST:event_SearchedWordActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SearchedWordActionPerformed
-    }// GEN-LAST:event_SearchedWordActionPerformed
-
     /**
      * Opens a ShowInvesList window with all the abstracts stored in the database in
      * alphabetical order.
